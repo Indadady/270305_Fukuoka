@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JLH9GD9SVR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JLH9GD9SVR');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>후쿠오카 3박 4일 가이드북</title>
+    <meta name="description" content="2027.03.05~03.08 후쿠오카·히타·벳부·유후인·아소·구마모토 3박 4일 스마트 가이드북 · 이스타항공 ZE645/ZE648 · LAND ONLY · SYNCVERSE (SV-270305-FUKUOKA)">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://indadady.github.io/270305_Fukuoka/">
+    <meta property="og:title" content="후쿠오카 3박 4일 가이드북">
+    <meta property="og:description" content="2027.03.05(금)~03.08(월) · 이스타항공 ZE645/ZE648 · 10명 단독 · 싱크버스">
+    <meta property="og:image" content="https://indadady.github.io/270305_Fukuoka/assets/images/og-thumb.jpg">
+    <meta property="og:image:alt" content="유후인 긴린코 아침 안개">
+    <meta name="twitter:card" content="summary_large_image">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{colors:{tm:'#1a3b95','tm-dark':'#0f2868'}}}}</script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Nanum+Myeongjo:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root { --tm: #1a3b95; --tm-dark: #0f2868; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #f8fafc; color: #1e293b; word-break: keep-all; }
+        .hero-bg { background: linear-gradient(rgba(15,23,42,.45), rgba(26,59,149,.72)), url('assets/images/hero.jpg'); background-size: cover; background-position: center 40%; background-attachment: fixed; }
+        @media(max-width:768px){ .hero-bg { background-attachment: scroll; } }
+        #map-wrap { position: relative; z-index: 0; }
+        #map { height: 440px; width: 100%; border-radius: 1rem; z-index: 10; }
+        @media(min-width:1024px){ #map { height: 560px; } }
+        .leaflet-control-zoom { display: none !important; }
+        .leaflet-maplibre-gl { z-index: 0 !important; }
+        #map-distance { position: absolute; top: 12px; right: 12px; z-index: 450; min-width: 8rem; max-width: min(52vw, 13rem); text-align: right; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-radius: 14px; padding: 10px 12px; box-shadow: 0 8px 24px rgba(15,23,42,.14); border: 1px solid rgba(148,163,184,.35); pointer-events: none; }
+        #map-distance-time { white-space: pre-line; }
+        .map-zoom-btns { position: absolute; left: 12px; bottom: 14px; z-index: 450; display: flex; flex-direction: column; gap: 6px; }
+        .map-zoom-btns button { width: 40px; height: 40px; border-radius: 12px; border: 1px solid #cbd5e1; background: rgba(255,255,255,.96); color: #0f172a; font-size: 18px; font-weight: 800; box-shadow: 0 4px 14px rgba(15,23,42,.12); }
+        .custom-icon { background: transparent; border: none; }
+        .map-pin-wrap { display: flex; flex-direction: column; align-items: center; }
+        .map-pin-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; border: 2px solid #fff; box-shadow: 0 8px 16px rgba(15,23,42,.18); }
+        .map-pin-label { margin-top: 3px; background: rgba(255,255,255,.96); color: #0f172a; font-size: 10px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.2; padding: 2px 6px; border-radius: 6px; white-space: nowrap; box-shadow: 0 2px 8px rgba(15,23,42,.12); }
+        .map-bus { font-size: 22px; line-height: 1; filter: drop-shadow(0 4px 8px rgba(15,23,42,.35)); transform-origin: center center; display: inline-block; }
+        .leaflet-tooltip { font-family: 'Noto Sans KR', sans-serif !important; font-weight: 700 !important; border-radius: 8px !important; border: none !important; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        section { scroll-margin-top: 88px; }
+        body.event-day section { scroll-margin-top: 148px; }
+        .brand-logo { height: 2.25rem; width: auto; object-fit: contain; }
+        @media(min-width:768px){ .brand-logo { height: 2.6rem; } }
+        .timeline-dot { position: absolute; left: -25px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--tw-ring-color); background-color: var(--tw-bg-color); }
+        @media(max-width:1023px){ .timeline-dot { left: -20px; width: 14px; height: 14px; } }
+        .schedule-media { display: flex; flex-direction: column; gap: .5rem; margin-top: .5rem; }
+        @media(min-width:768px){ .schedule-media { flex-direction: row; align-items: flex-start; gap: 1rem; } .schedule-media .schedule-desc { flex: 1; min-width: 0; } }
+        .schedule-thumb { display: block; width: 100%; max-width: 12rem; aspect-ratio: 4/3; object-fit: cover; border-radius: .75rem; border: 1px solid #e2e8f0; }
+        .contact-row { display: flex; align-items: center; gap: .75rem; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: .75rem; padding: .875rem 1rem; }
+        .contact-badge { flex-shrink: 0; width: 3rem; text-align: center; font-size: .65rem; font-weight: 800; padding: .35rem .25rem; border-radius: .5rem; }
+        #event-day-bar { background: #fff; border-bottom: 1px solid #e2e8f0; }
+        @media screen { #print-area { display: none !important; } }
+        @media print {
+            @page { size: A4 portrait; margin: 10mm 12mm; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            html, body { background: #fff !important; color: #000 !important; }
+            header, footer, section:not(#print-area), .no-print, #toast, #tm-inquiry-modal, #phrase-modal, #custom-confirm { display: none !important; }
+            #print-area { display: block !important; }
+            .print-page-2 { break-before: page; page-break-before: always; }
+            .print-header-top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--tm); padding-bottom: 6px; margin-bottom: 8px; }
+            .print-header-top img { height: 26px; }
+            .print-doc-no { font-size: 9px; color: #555; font-weight: bold; }
+            .print-title { text-align: center; font-size: 16px; font-weight: 900; color: var(--tm); margin-bottom: 2px; line-height: 1.35; }
+            .print-subtitle { text-align: center; font-size: 9px; color: #475569; margin: 0 0 8px; }
+            .print-overview { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; background: #f8fafc !important; border: 1px solid #cbd5e1 !important; border-radius: 4px; padding: 6px 10px; margin-bottom: 8px; font-size: 9.5px; }
+            .print-overview .label { font-weight: 800; color: var(--tm); margin-right: 4px; }
+            .tm-table { width: 100%; border-collapse: collapse; font-size: 9px; table-layout: fixed; border: 1.5px solid #1e293b !important; }
+            .tm-table th, .tm-table td { border: 1px solid #1e293b !important; }
+            .tm-table th { background: #f1f5f9 !important; text-align: center; padding: 4px !important; color: var(--tm); font-size: 10px; }
+            .tm-table td { padding: 5px 7px !important; vertical-align: top; line-height: 1.4; }
+            .tm-col-date { width: 12%; text-align: center; font-weight: 700; background: #f8fafc !important; vertical-align: middle; }
+            .tm-col-meal { width: 16%; text-align: center; vertical-align: middle; }
+            .tm-desc-list { list-style: none; margin: 2px 0; padding: 0; }
+            .tm-desc-list li { position: relative; padding-left: 9px; margin-bottom: 2px; }
+            .tm-desc-list li::before { content: '■'; font-size: 6px; position: absolute; left: 0; top: 3px; color: var(--tm); }
+            .tm-highlight { font-weight: 700; color: var(--tm); }
+            .tm-hotel-info { font-size: 8.5px; font-weight: bold; color: #334155; margin-top: 3px; }
+            .tm-meal-simple { font-size: 9px; text-align: left; }
+            .print-box { border: 1.5px solid #1e293b; border-radius: 4px; padding: 8px 10px; margin-top: 8px; font-size: 9.5px; line-height: 1.45; }
+            .print-box h3 { color: var(--tm); font-size: 12px; font-weight: 900; margin-bottom: 4px; }
+            .print-contacts { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; margin-top: 8px; font-size: 9.5px; }
+            .pc-role { font-weight: 800; color: var(--tm); margin-right: 3px; }
+        }
+    </style>
+</head>
+<body class="antialiased pb-20 md:pb-0">
+    <header class="bg-white/95 backdrop-blur-md shadow-md sticky top-0 z-50 no-print">
+        <nav class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3 shrink-0">
+                <a href="https://www.syncverse.co.kr/" target="_blank" rel="noopener noreferrer" title="SYNCVERSE" class="inline-flex items-center">
+                    <img src="assets/images/syncverse-logo.png" alt="SYNCVERSE" class="brand-logo">
+                </a>
+                <span id="d-day-badge" class="bg-tm text-white text-[10px] px-2.5 py-1 rounded-full font-bold shadow-sm">일정 계산중</span>
+            </div>
+            <div class="flex-1 overflow-x-auto no-scrollbar ml-3 md:ml-6">
+                <div class="flex items-center space-x-1 whitespace-nowrap pr-4 text-sm">
+                    <a href="#home" class="px-3 py-2 font-bold text-slate-600 hover:text-tm rounded-lg">홈</a>
+                    <a href="#highlights" class="px-3 py-2 font-bold text-tm rounded-lg">핵심</a>
+                    <a href="#flight" class="px-3 py-2 font-medium text-slate-600 hover:text-tm rounded-lg">항공</a>
+                    <a href="#seat-checkin" class="px-3 py-2 text-sm font-bold text-sky-700 hover:bg-sky-50 rounded-lg">좌석·체크인</a>
+                    <a href="#map-section" class="px-3 py-2 font-medium text-slate-600 hover:text-tm rounded-lg">동선</a>
+                    <a href="#schedule" class="px-3 py-2 font-bold text-tm rounded-lg">상세일정</a>
+                    <a href="#hotel" class="px-3 py-2 font-medium text-slate-600 hover:text-tm rounded-lg">호텔</a>
+                    <a href="#contact" class="px-3 py-2 font-bold text-red-600 rounded-lg">연락망</a>
+                </div>
+            </div>
+            <button type="button" onclick="shareLink()" class="p-2 text-slate-500 hover:text-tm shrink-0" title="공유"><i class="fa-solid fa-share-nodes text-xl"></i></button>
+        </nav>
+    </header>
+    <div id="event-day-bar" class="hidden no-print">
+        <div class="container mx-auto px-4 py-2.5 flex gap-2">
+            <button type="button" onclick="goToTodaySchedule()" class="flex-1 bg-tm text-white text-sm font-bold py-2.5 rounded-xl shadow-sm">오늘의 일정</button>
+            <button type="button" onclick="goToTodayRoute()" class="flex-1 bg-white text-tm border border-tm text-sm font-bold py-2.5 rounded-xl">당일 동선</button>
+        </div>
+    </div>
+
+    <main>
+        <div id="print-area">
+            <div class="print-header-top">
+                <img src="assets/images/syncverse-logo.png" alt="SYNCVERSE">
+                <div class="print-doc-no">문서번호: SV-270305-FUKUOKA</div>
+            </div>
+            <div class="print-title">후쿠오카 3박 4일 일정표</div>
+            <p class="print-subtitle">히타 · 벳부 · 유후인 · 아소 · 구마모토 · 야나가와 · 다자이후 · 항공·현지 사정에 따라 바뀔 수 있습니다.</p>
+            <div class="print-overview">
+                <div><span class="label">상품</span> 후쿠오카 3박 4일 (ZE) · LAND ONLY</div>
+                <div><span class="label">일정</span> 2027.03.05(금) ~ 03.08(월)</div>
+                <div><span class="label">인원</span> 10+1TG · 5트윈 · 전용차량 28인승</div>
+                <div><span class="label">항공</span> ZE645 08:40/10:20 · ZE648 15:20/16:30 (항공료 별도)</div>
+                <div><span class="label">담당</span> 양리리 010-2359-3449</div>
+            </div>
+            <table class="tm-table">
+                <thead><tr><th class="tm-col-date">일자/지역</th><th>일정</th><th class="tm-col-meal">식사</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="tm-col-date">1일차<br>3/5(금)<br>인천<br>히타<br>벳부</td>
+                        <td>
+                            <ul class="tm-desc-list">
+                                <li><strong>ZE645</strong> 인천 08:40 출발 / 후쿠오카 10:20 도착 · 입국 수속 후 스루가이드 미팅</li>
+                                <li>히타 이동(약 1시간 20분) · <span class="tm-highlight">마메다마치 거리</span> · <span class="tm-highlight">이이치코 히타 증류소</span>(무료 시음)</li>
+                                <li>아마가세 이동(약 30분) · <span class="tm-highlight">지온노타키</span></li>
+                                <li>벳부 이동(약 1시간) · 호텔 투숙 · 온천</li>
+                            </ul>
+                            <div class="tm-hotel-info">🏨 오에도 벳부 후게츠 또는 동급 (준4성급) · 북앤바이</div>
+                        </td>
+                        <td class="tm-col-meal"><div class="tm-meal-simple">조 불포함</div><div class="tm-meal-simple">중 현지식</div><div class="tm-meal-simple">석 호텔 뷔페</div></td>
+                    </tr>
+                    <tr>
+                        <td class="tm-col-date">2일차<br>3/6(토)<br>벳부<br>유후인<br>아소</td>
+                        <td>
+                            <ul class="tm-desc-list">
+                                <li><span class="tm-highlight">가마도지옥</span> 족욕 · 달걀·라무네 1인 1개</li>
+                                <li><span class="tm-highlight">유노사토</span> 유노하나 재배지</li>
+                                <li>유후인 이동(약 50분) · 민예촌 거리 · <span class="tm-highlight">긴린코</span></li>
+                                <li>아소 이동(약 1시간) · <span class="tm-highlight">다이칸보</span> · <span class="tm-highlight">쿠사센리</span> · 온천</li>
+                            </ul>
+                            <div class="tm-hotel-info">🏨 아소 카도망 또는 동급 (준4성급) · 북앤바이</div>
+                        </td>
+                        <td class="tm-col-meal"><div class="tm-meal-simple">조 호텔식</div><div class="tm-meal-simple">중 토반야키</div><div class="tm-meal-simple">석 호텔 뷔페</div></td>
+                    </tr>
+                    <tr>
+                        <td class="tm-col-date">3일차<br>3/7(일)<br>구마모토<br>야나가와<br>후쿠오카</td>
+                        <td>
+                            <ul class="tm-desc-list">
+                                <li>구마모토 이동(약 1시간 20분) · <span class="tm-highlight">구마모토성(천수각)</span> · <span class="tm-highlight">사쿠라노바바 조사이엔</span></li>
+                                <li>야나가와 이동(약 1시간 20분) · <span class="tm-highlight">뱃놀이</span></li>
+                                <li>다자이후 이동(약 1시간 20분) · <span class="tm-highlight">다자이후 텐만구</span></li>
+                                <li>후쿠오카 이동(약 30분) · 호텔 투숙</li>
+                            </ul>
+                            <div class="tm-hotel-info">🏨 몬테 에르마나 후쿠오카 또는 동급 (준4성급) · 북앤바이</div>
+                        </td>
+                        <td class="tm-col-meal"><div class="tm-meal-simple">조 호텔식</div><div class="tm-meal-simple">중 야키니쿠</div><div class="tm-meal-simple">석 샤브샤브 무제한</div></td>
+                    </tr>
+                    <tr>
+                        <td class="tm-col-date">4일차<br>3/8(월)<br>후쿠오카<br>인천</td>
+                        <td>
+                            <ul class="tm-desc-list">
+                                <li><span class="tm-highlight">하카타 타워(외관)</span> · 베이사이드 플레이스</li>
+                                <li>면세점 쇼핑 1회 · 공항 이동</li>
+                                <li><strong>ZE648</strong> 후쿠오카 15:20 출발 / 인천 16:30 도착</li>
+                            </ul>
+                        </td>
+                        <td class="tm-col-meal"><div class="tm-meal-simple">조 호텔식</div><div class="tm-meal-simple">중 미즈타키 정식</div><div class="tm-meal-simple">석 불포함</div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="print-contacts">
+                <span><span class="pc-role">담당</span> 양리리 010-2359-3449</span>
+                <span><span class="pc-role">홈페이지</span> www.syncverse.co.kr</span>
+                <span><span class="pc-role">후쿠오카총영사관</span> +81-92-771-0461</span>
+                <span><span class="pc-role">영사콜센터</span> +82-2-3210-0404</span>
+            </div>
+
+            <div class="print-page-2">
+                <div class="print-header-top">
+                    <img src="assets/images/syncverse-logo.png" alt="SYNCVERSE">
+                    <div class="print-doc-no">좌석·체크인 · 보조배터리 요약</div>
+                </div>
+                <div class="print-box">
+                    <h3>이스타항공 ZE645 / ZE648 · 온라인 체크인</h3>
+                    <p>항공권 발권(E-티켓 발행) 완료 후, 출발 24시간 전부터 1시간 30분 전까지 온라인 체크인에서 남은 일반석을 무료로 고를 수 있습니다. 일본 출발(ZE648)도 온라인 체크인이 됩니다. 앞좌석·비상구 등 일부 좌석은 유료일 수 있고, 10명 이상 단체 예약은 개인 화면이 열리지 않을 수 있습니다. 그때는 공항 카운터에서 일행 여권을 함께 제시하고 인접 좌석을 요청해 주세요. 스루가이드가 같은 편으로 동행합니다.</p>
+                    <p style="margin-top:4px;"><strong>가는 편 ZE645</strong> 3/5(금) 08:40 인천 → 10:20 후쿠오카 · 온라인 체크인 3/4(목) 08:40~3/5(금) 07:10 · 인천 T1 3층 F카운터 06:10~07:40</p>
+                    <p><strong>오는 편 ZE648</strong> 3/8(월) 15:20 후쿠오카 → 16:30 인천 · 온라인 체크인 3/7(일) 15:20~3/8(월) 13:50 · 후쿠오카 국제선 3층 K카운터 12:50~14:20</p>
+                    <p style="margin-top:4px;">위탁 수하물은 출발 1시간 전까지. 허용량은 발권 운임을 따릅니다. 항공사 정책과 당일 공항 사정으로 바뀔 수 있습니다.</p>
+                </div>
+                <div class="print-box">
+                    <h3>보조배터리 · 전자담배</h3>
+                    <p>기내 사용·충전 금지. 위탁 수하물 절대 금지. 선반 보관 불가, 직접 휴대하거나 앞좌석 주머니에 둡니다. 단락 방지(절연테이프, 투명 비닐 개별 보관, 전자담배 전원 OFF). 1인 최대 2개. 160Wh 초과 불가. 100Wh 초과~160Wh 이하는 카운터 승인. 파손·리콜 제품 반입 금지.</p>
+                </div>
+                <div class="print-box">
+                    <h3>포함 / 불포함</h3>
+                    <p><strong>포함</strong> 호텔(2인 1실), 전용차량(28인승), 식사, 입장료, 기사·스루가이드, 기사·가이드 팁. 스루가이드 항공료(TAX·유류세)는 여행사 부담. 쇼핑은 면세점 1회.</p>
+                    <p><strong>불포함</strong> 항공료, TAX 및 유류세, 매너팁(기타 팁), 개인 경비, 여행자보험.</p>
+                    <p>호텔은 북앤바이입니다. 예약 시점과 현지 사정에 따라 동급으로 바뀔 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <section id="home" class="hero-bg min-h-[72vh] flex items-center justify-center text-center px-4">
+            <div class="text-white z-10 w-full max-w-4xl py-16">
+                <span class="bg-white/20 backdrop-blur-md px-5 py-2 rounded-full text-sm font-bold mb-6 inline-block border border-white/30">후쿠오카 · 3박 4일 · 10명 단독</span>
+                <h1 class="text-4xl md:text-6xl font-bold mb-5 font-[Nanum_Myeongjo] leading-tight">온천과 성과 뱃놀이<br><span class="text-blue-200">규슈 서쪽 나흘</span></h1>
+                <p id="hero-date" class="text-base md:text-lg text-slate-100 font-medium bg-black/40 inline-block px-6 py-2.5 rounded-2xl backdrop-blur-sm border border-white/10">2027.03.05(금) ~ 03.08(월) · ZE645 / ZE648 · LAND ONLY</p>
+                <div class="mt-8"><a href="#highlights" class="text-white/80"><i class="fa-solid fa-chevron-down text-2xl"></i></a></div>
+            </div>
+        </section>
+
+        <section id="highlights" class="py-16 bg-white -mt-8 rounded-t-3xl relative z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.06)]">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-10">
+                    <span class="text-tm font-black tracking-widest text-xs uppercase bg-blue-50 px-4 py-1.5 rounded-full">SYNCVERSE</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mt-4">이번 여정에서 만나는 곳</h2>
+                    <p class="text-sm text-slate-500 mt-2">10명과 스루가이드 1명 · 5트윈 · 28인승 전용차량 · 면세점 쇼핑 1회</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-5 mb-10">
+                    <div class="bg-blue-50/60 p-7 rounded-3xl border border-blue-100">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-tm text-xl mb-3"><i class="fa-solid fa-hot-tub-person"></i></div>
+                        <h3 class="text-lg font-bold mb-2">벳부 지옥온천 · 유후인</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">가마도지옥 족욕과 유노하나 재배지를 보고, 유후인 거리와 물안개 긴린코를 둘러봅니다. 1·2일차 호텔에서 온천욕이 있습니다.</p>
+                    </div>
+                    <div class="bg-blue-50/60 p-7 rounded-3xl border border-blue-100">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-amber-500 text-xl mb-3"><i class="fa-solid fa-mountain-sun"></i></div>
+                        <h3 class="text-lg font-bold mb-2">히타 · 아마가세 · 아소</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">마메다마치와 이이치코 증류소, 지온노타키를 지나 다이칸보 전망과 쿠사센리 초원으로 이어집니다.</p>
+                    </div>
+                    <div class="bg-blue-50/60 p-7 rounded-3xl border border-blue-100">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-rose-500 text-xl mb-3"><i class="fa-solid fa-torii-gate"></i></div>
+                        <h3 class="text-lg font-bold mb-2">성과 신사, 그리고 뱃놀이</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">구마모토성 천수각, 조사이엔, 야나가와 뱃놀이, 다자이후 텐만구를 보고 후쿠오카에서 하카타 타워와 면세점을 들릅니다.</p>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50">
+                        <h4 class="font-bold text-tm mb-2">포함</h4>
+                        <p class="text-slate-600 leading-relaxed">호텔(2인 1실), 전용차량(28인승), 일정 식사, 입장료, 기사·스루가이드, 기사·가이드 팁. 스루가이드 항공료(TAX·유류세)는 여행사 부담입니다.</p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-200 p-5 bg-slate-50">
+                        <h4 class="font-bold text-rose-700 mb-2">불포함 · 참고</h4>
+                        <p class="text-slate-600 leading-relaxed">항공료, TAX 및 유류세, 매너팁, 개인 경비, 여행자보험. 호텔은 북앤바이로, 예약 시점에 따라 동급으로 바뀔 수 있습니다. 쇼핑은 면세점 1회입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flight" class="py-16 bg-slate-50 border-t border-slate-200">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-8">
+                    <span class="text-tm font-black text-xs tracking-widest">EASTAR JET · ZE</span>
+                    <h2 class="text-3xl font-bold mt-2">이스타항공 이용 편</h2>
+                    <p class="text-sm text-slate-500 mt-2">항공료는 별도(LAND ONLY)입니다. 편명과 시각은 이번 상품 일정 기준이며, 항공사 사정으로 바뀔 수 있습니다.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
+                        <p class="text-xs font-bold text-sky-700 mb-2">가는 편 · 3/5(금)</p>
+                        <h3 class="text-2xl font-black text-slate-800">ZE645</h3>
+                        <p class="mt-3 text-slate-700 font-bold">인천 08:40 → 후쿠오카 10:20</p>
+                        <p class="text-sm text-slate-500 mt-2">인천공항 제1여객터미널 3층 F카운터. 도착 후 입국을 마치고 스루가이드와 만납니다.</p>
+                    </div>
+                    <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
+                        <p class="text-xs font-bold text-indigo-700 mb-2">오는 편 · 3/8(월)</p>
+                        <h3 class="text-2xl font-black text-slate-800">ZE648</h3>
+                        <p class="mt-3 text-slate-700 font-bold">후쿠오카 15:20 → 인천 16:30</p>
+                        <p class="text-sm text-slate-500 mt-2">후쿠오카공항 국제선 3층 K카운터. 일본 출발편도 온라인 체크인이 됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="seat-checkin" class="py-16 bg-sky-50/70 border-t border-sky-100">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-8">
+                    <span class="inline-block bg-sky-700 text-white text-xs px-3 py-1 rounded-full font-bold mb-3">EASTAR · SEAT &amp; CHECK-IN</span>
+                    <h2 class="text-2xl md:text-3xl font-bold">온라인 체크인 · 공항 수속</h2>
+                    <p class="text-slate-600 mt-2 text-sm">항공권 발권(E-티켓 발행) 완료 후 이용합니다. 일행 좌석은 온라인 체크인의 무료 좌석과, 공항에서 여권을 함께 보여주는 방법으로 안내합니다.</p>
+                </div>
+                <div class="bg-white rounded-3xl shadow-sm border border-sky-100 p-6 md:p-8 mb-6">
+                    <ol class="space-y-6 text-sm text-slate-600">
+                        <li class="flex gap-4">
+                            <span class="bg-sky-100 text-sky-800 w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</span>
+                            <div>
+                                <p class="font-bold text-slate-800">온라인 체크인에서 남은 일반석 선택
+                                    <span class="inline-block mt-1 text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200">출발 24시간 전 ~ 1시간 30분 전</span>
+                                </p>
+                                <p class="mt-1 leading-relaxed">이스타항공 홈페이지·앱에서 예약번호와 영문 이름으로 조회합니다. 일반석은 무료이고, 앞쪽·비상구 등 일부만 유료입니다. 10명 이상 단체 예약은 개인 온라인 체크인이 열리지 않을 수 있습니다. 그때는 아래 카운터에서 함께 진행하면 됩니다.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="bg-sky-100 text-sky-800 w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</span>
+                            <div>
+                                <p class="font-bold text-slate-800">가는 편 ZE645 · 인천
+                                    <span class="inline-block mt-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">3/4(목) 08:40 오픈 ~ 3/5(금) 07:10 마감</span>
+                                </p>
+                                <p class="mt-1 leading-relaxed">공항 카운터는 06:10~07:40, 인천공항 제1여객터미널 3층 F카운터입니다. 위탁 수하물은 07:40까지. 일행 여권을 함께 제시하면 인접 좌석을 요청할 수 있습니다. 스루가이드가 같은 편으로 동행합니다.</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="bg-sky-100 text-sky-800 w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</span>
+                            <div>
+                                <p class="font-bold text-slate-800">오는 편 ZE648 · 후쿠오카
+                                    <span class="inline-block mt-1 text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200">3/7(일) 15:20 오픈 ~ 3/8(월) 13:50 마감</span>
+                                </p>
+                                <p class="mt-1 leading-relaxed">일본 출발은 온라인 체크인이 됩니다. 카운터는 12:50~14:20, 후쿠오카공항 국제선 3층 K카운터입니다. 위탁 수하물은 14:20까지. 허용량은 발권된 운임 기준입니다.</p>
+                            </div>
+                        </li>
+                    </ol>
+                    <a href="https://www.eastarjet.com/newstar/PGWII00001" target="_blank" rel="noopener noreferrer" class="inline-flex mt-6 items-center gap-2 bg-sky-700 text-white font-bold px-5 py-3 rounded-xl text-sm">이스타항공 온라인 체크인</a>
+                </div>
+                <div class="bg-white rounded-3xl border border-amber-200 p-6 md:p-8">
+                    <h3 class="font-bold text-lg text-slate-800 mb-3">보조배터리 · 전자담배</h3>
+                    <ul class="text-sm text-slate-600 space-y-2 leading-relaxed">
+                        <li>기내에서 쓰거나 충전하지 않습니다. 위탁 수하물에는 넣지 않습니다.</li>
+                        <li>기내 선반에 올리지 않고, 몸에 지니거나 앞좌석 주머니에 둡니다.</li>
+                        <li>단락이 나지 않게 절연테이프를 붙이거나 투명 비닐에 하나씩 넣습니다. 전자담배는 전원을 끕니다.</li>
+                        <li>1인 최대 2개. 160Wh를 넘기면 보낼 수 없습니다. 100Wh 초과~160Wh 이하는 체크인 카운터 승인이 필요합니다. 파손·리콜 제품은 반입할 수 없습니다.</li>
+                    </ul>
+                </div>
+                <p class="text-center text-xs text-slate-500 mt-5">좌석 배정과 수속 시각은 항공사 정책과 당일 공항 사정에 따라 바뀔 수 있습니다.</p>
+            </div>
+        </section>
+
+        <section id="visitjapan" class="py-16 bg-amber-50 border-t border-amber-100">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-8">
+                    <span class="inline-block bg-amber-600 text-white text-xs px-3 py-1 rounded-full font-bold mb-3">VISIT JAPAN WEB</span>
+                    <h2 class="text-3xl font-bold">일본 입국 QR 미리 준비</h2>
+                    <p class="text-sm text-slate-600 mt-2">입국심사와 세관 신고를 미리 적어 두면 후쿠오카 도착 후 대기가 짧아집니다.</p>
+                </div>
+                <div class="bg-white rounded-3xl border border-amber-100 p-6 md:p-8 grid md:grid-cols-2 gap-6">
+                    <ol class="space-y-4 text-sm text-slate-600">
+                        <li><strong class="text-amber-800">1.</strong> Visit Japan Web에서 여권 정보를 등록합니다.</li>
+                        <li><strong class="text-amber-800">2.</strong> 입국심사와 세관신고를 각각 작성하고 QR을 저장합니다.</li>
+                        <li><strong class="text-amber-800">3.</strong> 후쿠오카공항 심사대에서 QR을 보여 줍니다. 화면 캡처를 꺼 두면 편합니다.</li>
+                        <li><strong class="text-amber-800">4.</strong> 숙소란에는 첫날 벳부 호텔 영문 주소를 넣습니다. 북앤바이로 동급이 바뀔 수 있으니, 출발 전 담당 양리리에게 받은 주소를 사용합니다.</li>
+                    </ol>
+                    <div class="bg-amber-50 rounded-2xl p-5 text-sm">
+                        <p class="font-bold text-amber-800 mb-2">3박 참고 주소 · 몬테 에르마나 후쿠오카</p>
+                        <p class="font-semibold text-slate-800 leading-relaxed">Hotel Monte Hermana Fukuoka<br>3-4-24 Watanabe-dori, Chuo-ku<br>Fukuoka 810-0004, Japan</p>
+                        <p class="text-xs text-slate-500 mt-2">TEL 092-735-7111 · 나카스마선 와타나베도리역 2번 출구 도보 약 2분</p>
+                        <p class="text-xs text-slate-500 mt-3">입국 신고의 숙소는 도착 당일 머무는 곳입니다. 1박 주소는 담당 안내를 우선합니다.</p>
+                        <a href="https://www.vjw.digital.go.jp/" target="_blank" rel="noopener noreferrer" class="inline-flex mt-4 bg-amber-600 text-white font-bold px-4 py-2.5 rounded-xl text-sm">Visit Japan Web</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="map-section" class="py-16 bg-white border-t border-slate-100">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-6">
+                    <span class="text-tm font-black tracking-widest text-xs">ROUTE</span>
+                    <h2 class="text-3xl font-bold mt-2">나흘 동선</h2>
+                    <p class="text-sm text-slate-500 mt-2">차량 구간은 도로를 따라 순서대로 그려집니다. 항공만 점선입니다.</p>
+                </div>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar justify-center mb-4">
+                    <button type="button" id="btn-map-all" class="map-btn px-4 py-2 rounded-full border text-sm font-bold bg-white text-slate-600" onclick="filterMap('all')">전체 여정</button>
+                    <button type="button" id="btn-map-day1" class="map-btn px-4 py-2 rounded-full border text-sm font-bold bg-white text-slate-600" onclick="filterMap('day1')">1일차</button>
+                    <button type="button" id="btn-map-day2" class="map-btn px-4 py-2 rounded-full border text-sm font-bold bg-white text-slate-600" onclick="filterMap('day2')">2일차</button>
+                    <button type="button" id="btn-map-day3" class="map-btn px-4 py-2 rounded-full border text-sm font-bold bg-white text-slate-600" onclick="filterMap('day3')">3일차</button>
+                    <button type="button" id="btn-map-day4" class="map-btn px-4 py-2 rounded-full border text-sm font-bold bg-white text-slate-600" onclick="filterMap('day4')">4일차</button>
+                </div>
+                <div id="map-wrap" class="max-w-5xl mx-auto border border-slate-200 rounded-2xl p-1 shadow-lg bg-white">
+                    <div id="map"></div>
+                    <div id="map-distance" class="hidden">
+                        <p class="text-[10px] font-bold text-slate-400">대략 이동</p>
+                        <p id="map-distance-leg" class="font-bold text-xs text-slate-800 leading-snug mt-0.5"></p>
+                        <p id="map-distance-time" class="font-black text-sm text-blue-700 mt-0.5"></p>
+                        <p id="map-distance-km" class="text-[10px] font-bold text-slate-500 mt-0.5"></p>
+                    </div>
+                    <div class="map-zoom-btns">
+                        <button type="button" onclick="mapZoom(1)" aria-label="줌인">+</button>
+                        <button type="button" onclick="mapZoom(-1)" aria-label="줌아웃">−</button>
+                    </div>
+                </div>
+                <p id="map-hint" class="text-center text-xs text-slate-500 mt-3"></p>
+                <p class="text-center text-xs text-slate-400 mt-2">호텔 핀은 안내된 숙소 또는 그 일대입니다. 동급으로 바뀌거나 당일 도로 사정으로 동선이 달라질 수 있습니다. 면세점 위치는 현지 안내를 따릅니다.</p>
+            </div>
+        </section>
+
+        <section id="schedule" class="py-16 bg-slate-50 border-t border-slate-200">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="text-center mb-6">
+                    <div class="flex items-center justify-center gap-3 flex-wrap">
+                        <h2 class="text-3xl font-bold">상세 일정</h2>
+                        <button type="button" onclick="handlePrint()" class="no-print inline-flex items-center gap-1.5 bg-slate-800 text-white px-3 py-1.5 rounded-lg text-xs font-bold">
+                            <i class="fa-solid fa-print"></i> 일정표 인쇄하기
+                        </button>
+                    </div>
+                    <p class="no-print md:hidden text-center text-xs text-slate-500 mt-2 leading-relaxed">모바일(카카오톡 등)에서는<br>인쇄가 어려울 수 있어요.<br>다른 브라우저나 PC에서 열어 주세요.</p>
+                    <p class="text-sm text-slate-500 mt-3">이동 시간은 도로가 막히지 않을 때의 대략 시간입니다.</p>
+                </div>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar justify-center mb-6">
+                    <button type="button" class="sched-tab px-4 py-2 rounded-full text-sm font-bold border" data-day="day1" onclick="openSchedule('day1')">3/5 1일차</button>
+                    <button type="button" class="sched-tab px-4 py-2 rounded-full text-sm font-bold border" data-day="day2" onclick="openSchedule('day2')">3/6 2일차</button>
+                    <button type="button" class="sched-tab px-4 py-2 rounded-full text-sm font-bold border" data-day="day3" onclick="openSchedule('day3')">3/7 3일차</button>
+                    <button type="button" class="sched-tab px-4 py-2 rounded-full text-sm font-bold border" data-day="day4" onclick="openSchedule('day4')">3/8 4일차</button>
+                </div>
+
+                <div id="day1" class="schedule-pane">
+                    <div class="bg-white rounded-3xl border border-slate-200 p-6 mb-4">
+                        <p class="text-xs font-bold text-sky-700 mb-1">인천 → 히타 → 아마가세 → 벳부</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-slate-100 px-2 py-1 rounded">조 불포함</span>
+                            <span class="bg-slate-100 px-2 py-1 rounded">중 현지식</span>
+                            <span class="bg-slate-100 px-2 py-1 rounded">석 호텔 뷔페</span>
+                        </div>
+                        <div class="relative border-l-2 border-slate-200 ml-3 pl-6 space-y-6">
+                            <div class="relative"><div class="timeline-dot bg-slate-700 ring-slate-200"></div><h4 class="font-bold">ZE645 인천 08:40 출발 / 후쿠오카 10:20 도착</h4><p class="text-sm text-slate-600 mt-1">입국 수속 후 스루가이드와 만나 전용차량으로 이동합니다.</p></div>
+                            <div class="relative"><div class="timeline-dot bg-sky-500 ring-sky-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">히타 마메다마치</h4><p class="text-sm text-slate-600 mt-1">공항에서 약 1시간 20분. 규슈의 작은 교토라고 불리는 옛 상가 거리를 걷습니다.</p></div><img src="assets/images/day1-hita.jpg" alt="히타 마메다마치" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-sky-500 ring-sky-100"></div><h4 class="font-bold">이이치코 히타 증류소</h4><p class="text-sm text-slate-600 mt-1">보리소주로 알려진 증류소를 견학하고 무료 시음이 있습니다.</p></div>
+                            <div class="relative"><div class="timeline-dot bg-sky-500 ring-sky-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">지온노타키</h4><p class="text-sm text-slate-600 mt-1">아마가세까지 약 30분. 이무기가 용이 되어 승천했다는 이야기의 2단 폭포입니다.</p></div><img src="assets/images/day1-waterfall.jpg" alt="지온노타키" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-tm ring-blue-100"></div><h4 class="font-bold">벳부 호텔 · 온천</h4><p class="text-sm text-slate-600 mt-1">약 1시간 이동. 오에도 벳부 후게츠 또는 동급. 호텔 식사 뷔페.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="day2" class="schedule-pane hidden">
+                    <div class="bg-white rounded-3xl border border-slate-200 p-6">
+                        <p class="text-xs font-bold text-amber-700 mb-1">벳부 → 유후인 → 아소</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-slate-100 px-2 py-1 rounded">조 호텔식</span>
+                            <span class="bg-slate-100 px-2 py-1 rounded">중 토반야키</span>
+                            <span class="bg-slate-100 px-2 py-1 rounded">석 호텔 뷔페</span>
+                        </div>
+                        <div class="relative border-l-2 border-slate-200 ml-3 pl-6 space-y-6">
+                            <div class="relative"><div class="timeline-dot bg-amber-500 ring-amber-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">가마도지옥</h4><p class="text-sm text-slate-600 mt-1">지옥온천 순례. 족욕이 있고 달걀과 라무네를 1인 1개 드립니다.</p></div><img src="assets/images/day2-jigoku.jpg" alt="가마도지옥" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-amber-500 ring-amber-100"></div><h4 class="font-bold">유노사토</h4><p class="text-sm text-slate-600 mt-1">온천의 꽃이라고 불리는 명반, 유노하나 재배지입니다.</p></div>
+                            <div class="relative"><div class="timeline-dot bg-amber-500 ring-amber-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">유후인 거리 · 긴린코</h4><p class="text-sm text-slate-600 mt-1">약 50분 이동. 민예 가게가 늘어선 거리를 걷고, 수면에 물안개가 피어오르는 긴린코를 봅니다.</p></div><img src="assets/images/day2-yufuin.jpg" alt="유후인 긴린코" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-amber-500 ring-amber-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">다이칸보 · 쿠사센리</h4><p class="text-sm text-slate-600 mt-1">아소까지 약 1시간. 전망대에서 칼데라를 보고 초원 쿠사센리를 지나 호텔로 갑니다.</p></div><img src="assets/images/day2-aso.jpg" alt="아소 일대 참고" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-tm ring-blue-100"></div><h4 class="font-bold">아소 호텔 · 온천</h4><p class="text-sm text-slate-600 mt-1">아소 카도망 또는 동급. 호텔 식사 뷔페.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="day3" class="schedule-pane hidden">
+                    <div class="bg-white rounded-3xl border border-slate-200 p-6">
+                        <p class="text-xs font-bold text-emerald-700 mb-1">구마모토 → 야나가와 → 다자이후 → 후쿠오카</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-slate-100 px-2 py-1 rounded">조 호텔식</span>
+                            <span class="bg-slate-100 px-2 py-1 rounded">중 야키니쿠</span>
+                            <span class="bg-slate-100 px-2 py-1 rounded">석 샤브샤브 무제한</span>
+                        </div>
+                        <div class="relative border-l-2 border-slate-200 ml-3 pl-6 space-y-6">
+                            <div class="relative"><div class="timeline-dot bg-emerald-500 ring-emerald-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">구마모토성 · 조사이엔</h4><p class="text-sm text-slate-600 mt-1">약 1시간 20분. 천수각을 포함한 성과, 바로 옆 사쿠라노바바 조사이엔을 둘러봅니다.</p></div><img src="assets/images/day3-kumamoto.jpg" alt="구마모토성" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-emerald-500 ring-emerald-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">야나가와 뱃놀이</h4><p class="text-sm text-slate-600 mt-1">약 1시간 20분. 수로를 따라 작은 배로 마을을 지나갑니다.</p></div><img src="assets/images/day3-yanagawa.jpg" alt="야나가와 뱃놀이" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-emerald-500 ring-emerald-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">다자이후 텐만구</h4><p class="text-sm text-slate-600 mt-1">약 1시간 20분. 학문의 신을 모신 후쿠오카의 대표 신사입니다.</p></div><img src="assets/images/day3-dazaifu.jpg" alt="다자이후 텐만구" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-tm ring-blue-100"></div><h4 class="font-bold">후쿠오카 호텔</h4><p class="text-sm text-slate-600 mt-1">약 30분. 몬테 에르마나 후쿠오카 또는 동급. 석식은 샤브샤브 무제한.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="day4" class="schedule-pane hidden">
+                    <div class="bg-white rounded-3xl border border-slate-200 p-6">
+                        <p class="text-xs font-bold text-violet-700 mb-1">후쿠오카 → 인천</p>
+                        <div class="flex flex-wrap gap-2 text-xs mb-4">
+                            <span class="bg-slate-100 px-2 py-1 rounded">조 호텔식</span>
+                            <span class="bg-slate-100 px-2 py-1 rounded">중 미즈타키 정식</span>
+                            <span class="bg-slate-100 px-2 py-1 rounded">석 불포함</span>
+                        </div>
+                        <div class="relative border-l-2 border-slate-200 ml-3 pl-6 space-y-6">
+                            <div class="relative"><div class="timeline-dot bg-violet-500 ring-violet-100"></div>
+                                <div class="schedule-media"><div class="schedule-desc"><h4 class="font-bold">하카타 타워 · 베이사이드 플레이스</h4><p class="text-sm text-slate-600 mt-1">타워는 외관 관람입니다. 바닷가 산책로와 함께 봅니다.</p></div><img src="assets/images/day4-hakata.jpg" alt="하카타 포트 타워" class="schedule-thumb"></div>
+                            </div>
+                            <div class="relative"><div class="timeline-dot bg-violet-500 ring-violet-100"></div><h4 class="font-bold">면세점 1회</h4><p class="text-sm text-slate-600 mt-1">쇼핑은 이번 일정에서 이 한 곳입니다. 가게 위치는 현지에서 안내합니다.</p></div>
+                            <div class="relative"><div class="timeline-dot bg-slate-700 ring-slate-200"></div><h4 class="font-bold">ZE648 후쿠오카 15:20 출발 / 인천 16:30 도착</h4><p class="text-sm text-slate-600 mt-1">중식은 미즈타키 정식. 인천 도착 후 해산합니다.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 text-center mt-6">호텔·식사·입장 장소는 현지 사정에 따라 동급으로 바뀔 수 있습니다.</p>
+            </div>
+        </section>
+
+        <section id="hotel" class="py-16 bg-white border-t">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold">숙소</h2>
+                    <p class="text-sm text-slate-500 mt-2">2인 1실 · 준4성급 또는 동급 · 북앤바이. 예약 시점과 현지 사정에 따라 바뀔 수 있습니다.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <article class="rounded-3xl border border-slate-200 p-6 bg-slate-50">
+                        <p class="text-xs font-bold text-sky-700 mb-2">1박 · 3/5</p>
+                        <h3 class="font-bold text-lg mb-2">오에도 벳부 후게츠 또는 동급</h3>
+                        <p class="text-slate-600 leading-relaxed">벳부 온천. 석식 뷔페와 온천욕. 영문 주소는 출발 전 담당자에게 받아 Visit Japan Web에 입력합니다.</p>
+                    </article>
+                    <article class="rounded-3xl border border-slate-200 p-6 bg-slate-50">
+                        <p class="text-xs font-bold text-amber-700 mb-2">2박 · 3/6</p>
+                        <h3 class="font-bold text-lg mb-2">아소 카도망 또는 동급</h3>
+                        <p class="text-slate-600 leading-relaxed">구마모토현 아소시 우치노마키 1095-1 일대. 석식 뷔페와 온천욕.</p>
+                    </article>
+                    <article class="rounded-3xl border border-slate-200 p-6 bg-slate-50">
+                        <p class="text-xs font-bold text-emerald-700 mb-2">3박 · 3/7</p>
+                        <h3 class="font-bold text-lg mb-2">몬테 에르마나 후쿠오카 또는 동급</h3>
+                        <p class="text-slate-600 leading-relaxed">후쿠오카시 주오구 와타나베도리 3-4-24. 나카스마선 와타나베도리역에서 가깝습니다. 석식은 샤브샤브.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="smart-info" class="py-16 bg-slate-50 border-t">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold">여행에 도움 되는 정보</h2>
+                    <p class="text-sm text-slate-500 mt-2">3월 초 규슈는 낮에도 쌀쌀합니다. 아소는 후쿠오카보다 더 춥습니다.</p>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-6 text-white">
+                        <h3 class="text-sm font-bold text-blue-100 mb-2">후쿠오카 날씨</h3>
+                        <p id="weather-temp" class="text-5xl font-black">--°</p>
+                        <p id="weather-desc" class="text-sm mt-1">불러오는 중</p>
+                        <p id="clothing-desc" class="text-xs mt-4 bg-white/15 rounded-xl p-3 leading-relaxed">겉옷과 편한 신발을 준비해 주세요. 온천 수건은 호텔 안내를 따릅니다.</p>
+                        <div id="weekly-forecast" class="flex gap-2 overflow-x-auto no-scrollbar mt-4 text-xs"></div>
+                    </div>
+                    <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200 p-6">
+                        <div class="flex items-end gap-2 flex-wrap mb-2">
+                            <h3 class="font-bold">100엔 =</h3>
+                            <span id="exchange-rate" class="text-4xl font-black text-tm">---</span>
+                            <span class="font-bold">원</span>
+                            <span class="text-[10px] text-rose-500 bg-rose-50 px-2 py-1 rounded-full">수수료 1.5% 참고</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-slate-50 rounded-2xl p-3 mb-4">
+                            <input id="jpy-input" type="number" value="1000" class="w-28 border rounded-xl px-3 py-2 font-bold" aria-label="엔화">
+                            <span class="text-slate-400">엔 →</span>
+                            <span id="krw-output" class="font-black text-xl">0</span><span>원</span>
+                        </div>
+                        <div id="price-compare" class="grid sm:grid-cols-2 gap-x-6 text-sm"></div>
+                    </div>
+                </div>
+                <div class="bg-tm rounded-3xl p-6 md:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold mb-1">일본어로 보여 주기</h3>
+                        <p class="text-sm text-blue-100">식당·온천·이동할 때 화면을 건네면 됩니다.</p>
+                    </div>
+                    <button type="button" onclick="openPhraseModal()" class="bg-white text-tm font-bold px-6 py-3 rounded-xl">회화 카드 열기</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="check" class="py-16 bg-white border-t">
+            <div class="container mx-auto px-4 max-w-5xl grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-50 rounded-3xl border p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-xl">짐 체크</h3>
+                        <button type="button" onclick="resetChecklist()" class="text-xs text-slate-400 underline">초기화</button>
+                    </div>
+                    <div id="checklist-container" class="space-y-2"></div>
+                </div>
+                <div class="bg-yellow-50 rounded-3xl border border-yellow-200 p-6 flex flex-col">
+                    <h3 class="font-bold text-xl mb-3 text-yellow-800">메모</h3>
+                    <textarea id="travel-memo" class="flex-1 min-h-[220px] rounded-2xl border border-yellow-300 p-4 text-sm" placeholder="방 번호, 환전 금액 등을 적어 두세요. 이 기기에 저장됩니다."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 bg-blue-50 border-t">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <h2 class="text-3xl font-bold text-center mb-8">연락</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-tm text-white rounded-3xl p-7">
+                        <h3 class="font-bold text-xl mb-4">SYNCVERSE</h3>
+                        <div class="space-y-3">
+                            <div class="contact-row"><span class="contact-badge bg-white/20">담당</span><div><p class="font-bold">양리리</p><a class="text-blue-100 font-bold" href="tel:01023593449">010-2359-3449</a></div></div>
+                            <div class="contact-row"><span class="contact-badge bg-white/20">홈</span><div><a class="font-bold underline" href="https://www.syncverse.co.kr/" target="_blank" rel="noopener noreferrer">www.syncverse.co.kr</a></div></div>
+                            <div class="contact-row"><span class="contact-badge bg-white/20">현지</span><div><p class="font-bold">스루가이드</p><p class="text-sm text-blue-100">같은 항공편 동행 · 성함은 출발 전 안내</p></div></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-3xl border p-7">
+                        <h3 class="font-bold text-xl text-rose-800 mb-3">주후쿠오카 대한민국 총영사관</h3>
+                        <p class="font-bold">+81-92-771-0461</p>
+                        <p class="text-sm text-slate-500 mt-1 mb-4">후쿠오카시 주오구 지교하마 1-1-3</p>
+                        <p class="text-sm font-bold">영사콜센터 24시간</p>
+                        <p class="text-rose-600 font-bold">+82-2-3210-0404</p>
+                        <p class="text-xs text-slate-500 mt-4">이스타항공 고객센터 1544-0080</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="esg" class="py-14 bg-slate-800 text-white no-print">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="md:w-1/2">
+                        <span class="inline-block bg-emerald-600 text-xs font-bold px-3 py-1 rounded-full mb-3">ESG · 디지털 전환</span>
+                        <h2 class="text-2xl font-bold mb-2">종이 일정표 대신 이 화면</h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-3">10명 기준으로 인쇄 일정표 약 80장, 탄소 약 0.38kg, 물 약 750L를 아낄 수 있습니다.</p>
+                        <p id="tm-view-count" class="tm-view-count text-sm font-bold text-emerald-300">📊 실시간 가이드북 열람 : -회</p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 w-full md:w-1/2">
+                        <div class="bg-white/10 rounded-2xl p-4 text-center"><p class="text-xs text-emerald-300">종이</p><p class="text-2xl font-black">80<span class="text-sm">장</span></p></div>
+                        <div class="bg-white/10 rounded-2xl p-4 text-center"><p class="text-xs text-sky-300">탄소</p><p class="text-2xl font-black">0.38<span class="text-sm">kg</span></p></div>
+                        <div class="bg-white/10 rounded-2xl p-4 text-center"><p class="text-xs text-blue-200">물</p><p class="text-2xl font-black">750<span class="text-sm">L</span></p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-100 pt-10 pb-24 md:pb-10 text-center no-print border-t px-4">
+        <img src="assets/images/syncverse-logo.png" alt="SYNCVERSE" class="brand-logo mx-auto mb-3">
+        <p class="text-xs tracking-[0.16em] text-slate-500 font-bold mb-1">GLOBAL WELLNESS NETWORK</p>
+        <a href="https://www.syncverse.co.kr/" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-tm underline">www.syncverse.co.kr</a>
+        <p class="text-xs text-slate-500 mt-4">담당 양리리 010-2359-3449 · SV-270305-FUKUOKA</p>
+        <div class="max-w-xl mx-auto mt-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+            <p class="font-bold text-slate-800 mb-2">우리 모임·학교·기관도 스마트 가이드북으로 여행 준비하기</p>
+            <p class="tm-view-count text-sm font-bold text-tm mb-4">📊 실시간 가이드북 열람 : -회</p>
+            <button type="button" onclick="openInquiry()" class="bg-tm text-white font-bold px-5 py-3 rounded-xl text-sm">투어메이커 맞춤 견적 · 상담 문의</button>
+        </div>
+    </footer>
+
+    <div id="tm-inquiry-modal" class="fixed inset-0 z-[120] hidden items-end sm:items-center justify-center bg-black/60 px-0 sm:px-4 no-print" onclick="closeInquiry()">
+        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-lg">투어메이커 여행·가이드북 문의</h3>
+                <button type="button" onclick="closeInquiry()" class="text-slate-400 text-xl" aria-label="닫기">×</button>
+            </div>
+            <div class="space-y-3 text-sm">
+                <a href="https://pf.kakao.com/_fxjxiQn/chat" target="_blank" rel="noopener noreferrer" class="block rounded-2xl border p-4 font-bold">💬 카카오톡 비즈니스 1:1 상담<br><span class="text-xs font-medium text-slate-500">전담: 조혁 이사 · 조혁 이사 전담 응대</span></a>
+                <button type="button" onclick="openSms()" class="w-full text-left rounded-2xl border p-4 font-bold">📝 10초 문자(SMS) 간편 견적 문의<br><span class="text-xs font-medium text-slate-500">010-4249-4026 조혁 이사</span></button>
+                <div class="rounded-2xl border p-4">
+                    <p class="font-bold mb-2">📞 직통 전화 상담</p>
+                    <p><a class="font-bold text-tm" href="tel:01042494026">조혁 이사 010-4249-4026</a> <span class="text-xs text-slate-500">현장/카톡/견적</span></p>
+                    <p class="mt-1"><a class="font-bold text-tm" href="tel:01094437881">이재명 대표 010-9443-7881</a> <span class="text-xs text-slate-500">총괄/기획</span></p>
+                    <p class="mt-1"><a class="font-bold text-tm" href="tel:0335622551">사무실 033-562-2551</a></p>
+                </div>
+                <a href="https://tourmaker.kr/?utm_source=smart_guidebook&utm_medium=inquiry_modal&utm_campaign=270305-fukuoka" target="_blank" rel="noopener noreferrer" class="block rounded-2xl border p-4 font-bold">🌐 공식 홈페이지 &amp; 포트폴리오<br><span class="text-xs font-medium text-slate-500">tourmaker.kr</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="phrase-modal" class="fixed inset-0 z-[110] hidden items-end sm:items-center justify-center bg-black/70 px-0 sm:px-4 no-print" onclick="closePhraseModal()">
+        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl max-h-[85vh] overflow-hidden flex flex-col" onclick="event.stopPropagation()">
+            <div class="bg-tm text-white p-4 flex justify-between items-center"><h3 class="font-bold">일본어 카드</h3><button type="button" onclick="closePhraseModal()" class="text-xl" aria-label="닫기">×</button></div>
+            <div class="p-4 grid grid-cols-2 gap-2 overflow-y-auto bg-slate-50">
+                <button type="button" class="bg-white border rounded-xl p-3 text-sm font-bold" onclick="showPhrase('👋','안녕하세요','こんにちは','곤니치와')">안녕하세요</button>
+                <button type="button" class="bg-white border rounded-xl p-3 text-sm font-bold" onclick="showPhrase('🙏','감사합니다','ありがとうございます','아리가토 고자이마스')">감사합니다</button>
+                <button type="button" class="bg-white border rounded-xl p-3 text-sm font-bold" onclick="showPhrase('♨️','온천은 어디인가요?','温泉はどこですか？','온센와 도코데스카')">온천</button>
+                <button type="button" class="bg-white border rounded-xl p-3 text-sm font-bold" onclick="showPhrase('🚻','화장실은 어디인가요?','トイレはどこですか？','토이레와 도코데스카')">화장실</button>
+                <button type="button" class="bg-white border rounded-xl p-3 text-sm font-bold" onclick="showPhrase('💳','계산해 주세요','お会計をお願いします','오카이케이오 오네가이시마스')">계산</button>
+                <button type="button" class="bg-white border rounded-xl p-3 text-sm font-bold" onclick="showPhrase('🍜','맛있습니다','おいしいです','오이시이데스')">맛있어요</button>
+                <button type="button" class="bg-white border rounded-xl p-3 text-sm font-bold" onclick="showPhrase('🚌','버스는 어디인가요?','バスはどこですか？','바스와 도코데스카')">버스</button>
+                <button type="button" class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-sm font-bold text-rose-700" onclick="showPhrase('🚨','도와주세요','助けてください','타스케테 쿠다사이')">도와주세요</button>
+            </div>
+            <div id="phrase-display" class="hidden p-5 border-t text-center">
+                <p id="p-kr" class="font-bold text-slate-500"></p>
+                <p id="p-jp" class="text-3xl font-black text-tm my-2"></p>
+                <p id="p-prn" class="text-sm text-blue-600 font-bold"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="md:hidden fixed bottom-0 inset-x-0 bg-white border-t flex justify-around py-2 text-[10px] font-medium z-50 no-print">
+        <a href="#home" class="flex flex-col items-center text-tm"><i class="fa-solid fa-house text-lg"></i>홈</a>
+        <a href="#map-section" class="flex flex-col items-center"><i class="fa-solid fa-map-location-dot text-lg"></i>동선</a>
+        <a href="#schedule" class="flex flex-col items-center"><i class="fa-regular fa-calendar text-lg"></i>일정</a>
+        <a href="#contact" class="flex flex-col items-center text-rose-600"><i class="fa-solid fa-phone text-lg"></i>연락</a>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.20/leaflet-maplibre-gl.js"></script>
+    <script>
+        const TEST_DATE = "";
+        const EVENT_DAYS = { '2027-03-05':'day1', '2027-03-06':'day2', '2027-03-07':'day3', '2027-03-08':'day4' };
+        const PRINT_FILENAME = '270305_후쿠오카_일정표';
+        const PAGE_TITLE = document.title;
+        window.addEventListener('beforeprint', () => { document.title = PRINT_FILENAME; });
+        window.addEventListener('afterprint', () => { document.title = PAGE_TITLE; });
+
+        function getGuidebookToday() {
+            const q = new URLSearchParams(location.search).get('test_date');
+            if (q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return q;
+            if (TEST_DATE) return TEST_DATE;
+            return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(new Date());
+        }
+        function ymdDiffDays(a, b) {
+            const [ay, am, ad] = a.split('-').map(Number);
+            const [by, bm, bd] = b.split('-').map(Number);
+            return Math.round((Date.UTC(ay, am - 1, ad) - Date.UTC(by, bm - 1, bd)) / 86400000);
+        }
+        function getTodayDayKey() { return EVENT_DAYS[getGuidebookToday()] || null; }
+        function openSchedule(dayKey) {
+            document.querySelectorAll('.schedule-pane').forEach(el => el.classList.add('hidden'));
+            document.getElementById(dayKey)?.classList.remove('hidden');
+            document.querySelectorAll('.sched-tab').forEach(btn => {
+                const on = btn.dataset.day === dayKey;
+                btn.classList.toggle('bg-tm', on);
+                btn.classList.toggle('text-white', on);
+                btn.classList.toggle('border-tm', on);
+                btn.classList.toggle('bg-white', !on);
+                btn.classList.toggle('text-slate-600', !on);
+                btn.classList.toggle('border-slate-200', !on);
+            });
+        }
+        function goToTodaySchedule() {
+            const dayKey = getTodayDayKey();
+            if (dayKey) openSchedule(dayKey);
+            document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' });
+        }
+        function goToTodayRoute() {
+            const dayKey = getTodayDayKey();
+            if (dayKey && typeof filterMap === 'function') filterMap(dayKey);
+            document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' });
+        }
+        function initEventDayUI() {
+            const bar = document.getElementById('event-day-bar');
+            const dayKey = getTodayDayKey();
+            const on = !!dayKey;
+            bar.classList.toggle('hidden', !on);
+            document.body.classList.toggle('event-day', on);
+            openSchedule(dayKey || 'day1');
+            const today = getGuidebookToday();
+            const badge = document.getElementById('d-day-badge');
+            const hero = document.getElementById('hero-date');
+            if (today < '2027-03-05') {
+                badge.textContent = 'D-' + ymdDiffDays('2027-03-05', today);
+                badge.className = 'bg-tm text-white text-[10px] px-2.5 py-1 rounded-full font-bold';
+            } else if (today <= '2027-03-08') {
+                badge.textContent = (ymdDiffDays(today, '2027-03-05') + 1) + '일차';
+                badge.className = 'bg-rose-500 text-white text-[10px] px-2.5 py-1 rounded-full font-bold';
+                if (hero) hero.textContent = '오늘 일정은 아래 상세 일정과 동선에서 볼 수 있습니다.';
+            } else {
+                badge.textContent = '여행 종료';
+                badge.className = 'bg-slate-500 text-white text-[10px] px-2.5 py-1 rounded-full font-bold';
+            }
+        }
+        function isInAppBrowser() {
+            return /kakaotalk|naver|line\/|fbav|instagram|daumapps|everytimeapp|band\//i.test(navigator.userAgent);
+        }
+        function handlePrint() {
+            if (isInAppBrowser()) {
+                alert('이 앱에서는 인쇄가 어려워요.\n다른 브라우저나 PC에서 열어 주세요.');
+                return;
+            }
+            window.print();
+        }
+        function shareLink() {
+            const url = location.href;
+            const title = '후쿠오카 3박 4일 가이드북';
+            if (navigator.share) navigator.share({ title, url }).catch(() => {});
+            else navigator.clipboard?.writeText(url);
+        }
+        function openInquiry() {
+            const el = document.getElementById('tm-inquiry-modal');
+            el.classList.remove('hidden'); el.classList.add('flex');
+        }
+        function closeInquiry() {
+            const el = document.getElementById('tm-inquiry-modal');
+            el.classList.add('hidden'); el.classList.remove('flex');
+        }
+        function openSms() {
+            const body = encodeURIComponent('[후쿠오카 3박4일 가이드북 보고 문의드립니다] 단체/모임명 / 희망지역 / 예상인원 / 출발시기 : ');
+            const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            location.href = ios ? 'sms:01042494026&body=' + body : 'sms:01042494026?body=' + body;
+        }
+        function openPhraseModal() {
+            const el = document.getElementById('phrase-modal');
+            el.classList.remove('hidden'); el.classList.add('flex');
+        }
+        function closePhraseModal() {
+            const el = document.getElementById('phrase-modal');
+            el.classList.add('hidden'); el.classList.remove('flex');
+        }
+        function showPhrase(emoji, kr, jp, prn) {
+            document.getElementById('p-kr').textContent = emoji + ' ' + kr;
+            document.getElementById('p-jp').textContent = jp;
+            document.getElementById('p-prn').textContent = prn;
+            const box = document.getElementById('phrase-display');
+            box.classList.remove('hidden');
+        }
+
+        (function initViewCount() {
+            const slug = '270305-fukuoka';
+            const key = 'tm_hit_' + slug;
+            const nodes = document.querySelectorAll('.tm-view-count');
+            const paint = (n) => {
+                const text = '📊 실시간 가이드북 열람 : ' + Number(n).toLocaleString('ko-KR') + '회';
+                nodes.forEach(el => { el.textContent = text; });
+            };
+            const fallback = () => {
+                fetch('https://tally.yuki.sh/hits/tourmaker/' + slug + '.json')
+                    .then(r => r.json())
+                    .then(d => paint(d.hits || d.count || d.value || 0))
+                    .catch(() => {});
+            };
+            const seen = sessionStorage.getItem(key);
+            fetch('https://abacus.jasoncameron.dev/' + (seen ? 'get' : 'hit') + '/tourmaker.kr/' + slug)
+                .then(r => r.json())
+                .then(d => {
+                    sessionStorage.setItem(key, '1');
+                    const n = d.value ?? d.count ?? d.hits;
+                    if (n == null) throw new Error('empty');
+                    paint(n);
+                })
+                .catch(fallback);
+        })();
+
+        const CHECK_KEY = 'sv_fukuoka270305_chk';
+        const CHECK_ITEMS = [
+            '여권 (출국일 기준 유효기간 6개월 이상)',
+            'Visit Japan Web QR 저장',
+            '엔화와 해외 결제 카드',
+            '겉옷 (3월 초, 아소는 더 춥습니다)',
+            '편한 신발',
+            '개인 상비약',
+            '보조배터리 (기내 휴대, 위탁 금지)',
+            '개인 세면도구'
+        ];
+        function renderChecklist() {
+            const box = document.getElementById('checklist-container');
+            const saved = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
+            box.innerHTML = CHECK_ITEMS.map((label, i) => {
+                const id = 'chk_' + i;
+                return '<label class="flex items-center gap-3 bg-white border rounded-xl px-3 py-3 text-sm font-medium"><input type="checkbox" id="' + id + '"' + (saved[id] ? ' checked' : '') + ' class="h-5 w-5"> ' + label + '</label>';
+            }).join('');
+            box.querySelectorAll('input').forEach(cb => cb.addEventListener('change', () => {
+                const cur = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
+                cur[cb.id] = cb.checked;
+                localStorage.setItem(CHECK_KEY, JSON.stringify(cur));
+            }));
+        }
+        function resetChecklist() {
+            localStorage.removeItem(CHECK_KEY);
+            renderChecklist();
+        }
+        renderChecklist();
+        (function() {
+            const memo = document.getElementById('travel-memo');
+            const key = 'sv_fukuoka270305_memo';
+            memo.value = localStorage.getItem(key) || '';
+            memo.addEventListener('input', () => localStorage.setItem(key, memo.value));
+        })();
+
+        async function initLiveWidgets() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=33.59&longitude=130.40&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Asia%2FTokyo');
+                const data = await res.json();
+                const temp = Math.round(data.current_weather.temperature);
+                const code = data.current_weather.weathercode;
+                document.getElementById('weather-temp').textContent = temp + '°';
+                const label = code <= 3 ? '맑거나 구름' : (code >= 51 && code <= 67) ? '비' : (code >= 71 ? '눈·소나기' : '흐림');
+                document.getElementById('weather-desc').textContent = label;
+                document.getElementById('clothing-desc').textContent = temp >= 18
+                    ? '후쿠오카 낮은 선선합니다. 아침과 아소 일대는 겉옷을 챙기세요.'
+                    : '쌀쌀합니다. 자켓과 편한 신발, 여분의 양말을 준비하세요. 아소는 더 춥습니다.';
+                const days = ['일','월','화','수','목','금','토'];
+                document.getElementById('weekly-forecast').innerHTML = data.daily.time.slice(0, 5).map((t, i) => {
+                    const d = new Date(t + 'T12:00:00');
+                    return '<div class="bg-white/15 rounded-xl px-2 py-1 text-center min-w-[52px]"><div>' + (i === 0 ? '오늘' : days[d.getDay()]) + '</div><div class="font-bold">' + Math.round(data.daily.temperature_2m_min[i]) + ' / ' + Math.round(data.daily.temperature_2m_max[i]) + '</div></div>';
+                }).join('');
+            } catch (e) {
+                document.getElementById('weather-desc').textContent = '날씨를 불러오지 못했습니다.';
+            }
+            let rate = 9.2;
+            try {
+                const r = await fetch('https://open.er-api.com/v6/latest/JPY');
+                const j = await r.json();
+                if (j.rates && j.rates.KRW) rate = j.rates.KRW * 1.015;
+            } catch (e) {}
+            document.getElementById('exchange-rate').textContent = Math.round(rate * 100).toLocaleString('ko-KR');
+            const input = document.getElementById('jpy-input');
+            const out = document.getElementById('krw-output');
+            const calc = () => { out.textContent = Math.round((parseFloat(input.value) || 0) * rate).toLocaleString('ko-KR'); };
+            input.addEventListener('input', calc); calc();
+            const prices = [
+                ['라멘', 1000], ['편의점 주먹밥', 180], ['생수', 120], ['아메리카노', 450]
+            ];
+            document.getElementById('price-compare').innerHTML = prices.map(([n, p]) =>
+                '<div class="flex justify-between border-b py-2"><span>' + n + '</span><span class="font-bold">' + p + '엔 · 약 ' + Math.round(p * rate).toLocaleString('ko-KR') + '원</span></div>'
+            ).join('');
+        }
+        initLiveWidgets();
+        initEventDayUI();
+
+        let mapInited = false, currentMap = null, mapLayers = [], mapDrawSeq = 0, activeBus = null;
+        const osrmCache = {};
+        const spots = {
+            icn: { coords:[37.4602,126.4407], title:'인천공항', color:'#64748b', icon:'✈️' },
+            fuk: { coords:[33.5859,130.4507], title:'후쿠오카공항', color:'#64748b', icon:'✈️' },
+            mameda: { coords:[33.32798,130.93725], title:'히타 마메다마치', color:'#0ea5e9', icon:'🏘️' },
+            iichiko: { coords:[33.3302,130.9312], title:'이이치코 증류소', color:'#0ea5e9', icon:'🍶' },
+            chion: { coords:[33.26483,131.06836], title:'지온노타키', color:'#0ea5e9', icon:'💦' },
+            hotel1: { coords:[33.31415,131.4782], title:'벳부 호텔', color:'#1a3b95', icon:'🏨' },
+            kamado: { coords:[33.31645,131.47245], title:'가마도지옥', color:'#f59e0b', icon:'♨️' },
+            yunosato: { coords:[33.31828,131.45239], title:'유노사토', color:'#f59e0b', icon:'🌸' },
+            yufuin: { coords:[33.26609,131.36321], title:'유후인 거리', color:'#f59e0b', icon:'🛍️' },
+            kinrin: { coords:[33.26672,131.36904], title:'긴린코', color:'#f59e0b', icon:'🌫️' },
+            daikanbo: { coords:[32.99637,131.06723], title:'다이칸보', color:'#f59e0b', icon:'🗻' },
+            kusa: { coords:[32.88147,131.05355], title:'쿠사센리', color:'#f59e0b', icon:'🌿' },
+            hotel2: { coords:[32.9462,131.1085], title:'아소 호텔', color:'#1a3b95', icon:'🏨' },
+            kumamoto: { coords:[32.80527,130.70546], title:'구마모토성', color:'#10b981', icon:'🏯' },
+            josaien: { coords:[32.80333,130.70376], title:'조사이엔', color:'#10b981', icon:'🏯' },
+            yanagawa: { coords:[33.16098,130.40118], title:'야나가와', color:'#10b981', icon:'🚣' },
+            dazaifu: { coords:[33.51945,130.53446], title:'다자이후 텐만구', color:'#10b981', icon:'⛩️' },
+            hotel3: { coords:[33.58493,130.40518], title:'몬테 에르마나', color:'#1a3b95', icon:'🏨' },
+            hakata: { coords:[33.6042,130.3983], title:'하카타 타워', color:'#8b5cf6', icon:'🗼' },
+            duty: { coords:[33.5897,130.4206], title:'면세 쇼핑', color:'#8b5cf6', icon:'🛍️' }
+        };
+        const routes = {
+            all: { maxZoom: 8, points:['icn','fuk','mameda','iichiko','chion','hotel1','kamado','yunosato','yufuin','kinrin','daikanbo','kusa','hotel2','kumamoto','josaien','yanagawa','dazaifu','hotel3','hakata','duty'], lines:[
+                { pts:['icn','fuk'], color:'#64748b', mode:'air' },
+                { pts:['fuk','mameda','iichiko','chion','hotel1'], color:'#0ea5e9' },
+                { pts:['hotel1','kamado','yunosato','yufuin','kinrin','daikanbo','kusa','hotel2'], color:'#f59e0b' },
+                { pts:['hotel2','kumamoto','josaien','yanagawa','dazaifu','hotel3'], color:'#10b981' },
+                { pts:['hotel3','hakata','duty','fuk'], color:'#8b5cf6' },
+                { pts:['fuk','icn'], color:'#64748b', mode:'air' }
+            ]},
+            day1: { maxZoom: 11, points:['icn','fuk','mameda','iichiko','chion','hotel1'], lines:[
+                { pts:['icn','fuk'], color:'#64748b', mode:'air' },
+                { pts:['fuk','mameda','iichiko','chion','hotel1'], color:'#0ea5e9' }
+            ]},
+            day2: { maxZoom: 11, points:['hotel1','kamado','yunosato','yufuin','kinrin','daikanbo','kusa','hotel2'], lines:[
+                { pts:['hotel1','kamado','yunosato','yufuin','kinrin','daikanbo','kusa','hotel2'], color:'#f59e0b' }
+            ]},
+            day3: { maxZoom: 11, points:['hotel2','kumamoto','josaien','yanagawa','dazaifu','hotel3'], lines:[
+                { pts:['hotel2','kumamoto','josaien','yanagawa','dazaifu','hotel3'], color:'#10b981' }
+            ]},
+            day4: { maxZoom: 12, points:['hotel3','hakata','duty','fuk','icn'], lines:[
+                { pts:['hotel3','hakata','duty','fuk'], color:'#8b5cf6' },
+                { pts:['fuk','icn'], color:'#64748b', mode:'air' }
+            ]}
+        };
+        const mapHints = {
+            all: '전체 여정 · 항공은 점선, 현지는 도로',
+            day1: '1일차 · 인천 → 후쿠오카 → 히타 → 지온노타키 → 벳부',
+            day2: '2일차 · 벳부 → 유후인 → 다이칸보 → 쿠사센리 → 아소',
+            day3: '3일차 · 아소 → 구마모토 → 야나가와 → 다자이후 → 후쿠오카',
+            day4: '4일차 · 하카타 타워 → 면세점 → 후쿠오카공항 → 인천'
+        };
+        function isMobileView(){ return window.matchMedia('(max-width: 768px)').matches; }
+        function pathMeters(path){ let t=0; for(let i=1;i<path.length;i++) t += L.latLng(path[i-1]).distanceTo(L.latLng(path[i])); return t; }
+        function formatApproxKm(meters){
+            if(!meters) return '';
+            if(meters<800) return '약 '+Math.round(meters/100)*100+'m';
+            const km=meters/1000;
+            if(km<10) return '약 '+(Math.round(km*2)/2)+'km';
+            if(km<50) return '약 '+Math.round(km)+'km';
+            if(km<400) return '약 '+Math.round(km/5)*5+'km';
+            return '약 '+Math.round(km/50)*50+'km';
+        }
+        function estimateSeconds(meters, mode){ if(!meters) return 0; return meters / ((mode==='air'?800:25)/3.6); }
+        function groupTravelSeconds(seconds, mode){ if(!seconds) return 0; if(mode==='air') return seconds; return Math.max(12*60, seconds*1.4+10*60); }
+        function formatApproxTime(seconds){
+            if(!seconds) return '';
+            const min=Math.max(1, Math.ceil(seconds/60));
+            if(min<55) return '약 '+Math.max(15, Math.ceil(min/5)*5)+'분';
+            const rounded=Math.ceil(min/10)*10, h=Math.floor(rounded/60), m=rounded%60;
+            if(!h) return '약 '+m+'분';
+            if(!m) return '약 '+h+'시간';
+            return '약 '+h+'시간 '+m+'분';
+        }
+        function setMapDistance(fromKey, toKey, meters, seconds, mode){
+            const box=document.getElementById('map-distance');
+            if(!fromKey){ box.classList.add('hidden'); return; }
+            box.classList.remove('hidden');
+            document.getElementById('map-distance-leg').textContent = spots[fromKey].title+' → '+spots[toKey].title;
+            document.getElementById('map-distance-time').textContent = formatApproxTime(groupTravelSeconds(seconds, mode));
+            document.getElementById('map-distance-km').textContent = formatApproxKm(meters);
+        }
+        function pinIcon(spot){
+            return L.divIcon({ className:'custom-icon', html:'<div class="map-pin-wrap"><div class="map-pin-dot" style="background:'+spot.color+'">'+spot.icon+'</div><span class="map-pin-label">'+spot.title+'</span></div>', iconSize:[96,52], iconAnchor:[48,16] });
+        }
+        const PLANE_REST_DEG=45, BUS_REST_DEG=90;
+        function bearingDeg(from, to){
+            const lat1=from[0]*Math.PI/180, lat2=to[0]*Math.PI/180, dLng=(to[1]-from[1])*Math.PI/180;
+            const y=Math.sin(dLng)*Math.cos(lat2);
+            const x=Math.cos(lat1)*Math.sin(lat2)-Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLng);
+            return (Math.atan2(y,x)*180/Math.PI+360)%360;
+        }
+        function headingPair(latlngs, i){
+            const a=latlngs[Math.max(0, Math.min(i, latlngs.length-1))];
+            let j=Math.min(Math.max(i+1,1), latlngs.length-1);
+            while(j<latlngs.length-1 && L.latLng(a).distanceTo(L.latLng(latlngs[j]))<40) j++;
+            return [a, latlngs[j]];
+        }
+        function vehicleCssTransform(mode, from, to){
+            if(!from||!to) return 'rotate(0deg)';
+            if(L.latLng(from).distanceTo(L.latLng(to))<8) return null;
+            const heading=bearingDeg(from,to);
+            const rest=mode==='air'?PLANE_REST_DEG:BUS_REST_DEG;
+            let rot=heading-rest;
+            while(rot>180) rot-=360;
+            while(rot<-180) rot+=360;
+            if(mode!=='air' && Math.abs(rot)>90){
+                const flip=rot>0?rot-180:rot+180;
+                return 'scaleX(-1) rotate('+flip+'deg)';
+            }
+            return 'rotate('+rot+'deg)';
+        }
+        function vehicleIcon(mode, from, to){
+            const emoji=mode==='air'?'✈️':'🚌';
+            const transform=vehicleCssTransform(mode, from, to)||'rotate(0deg)';
+            return L.divIcon({ className:'custom-icon', html:'<div class="map-bus" style="transform:'+transform+'">'+emoji+'</div>', iconSize:[28,28], iconAnchor:[14,14] });
+        }
+        function applyVehicleHeading(marker, from, to, mode){
+            const transform=vehicleCssTransform(mode, from, to);
+            if(!transform) return;
+            const el=marker.getElement()?.querySelector('.map-bus');
+            if(el) el.style.transform=transform;
+        }
+        function clearMapLayers(){
+            if(activeBus) activeBus._aborted=true;
+            activeBus=null;
+            mapLayers.forEach(layer => { if(layer._aborted!==undefined) layer._aborted=true; currentMap.removeLayer(layer); });
+            mapLayers=[];
+        }
+        async function roadPath(pts){
+            const key=pts.map(p=>p.join(',')).join('|');
+            if(osrmCache[key]) return osrmCache[key];
+            try{
+                const coords=pts.map(p=>p[1]+','+p[0]).join(';');
+                const res=await fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson');
+                const data=await res.json();
+                if(data.code==='Ok' && data.routes && data.routes[0]){
+                    const path=data.routes[0].geometry.coordinates.map(([lng,lat])=>[lat,lng]);
+                    const packed={ path, meters:data.routes[0].distance, seconds:data.routes[0].duration };
+                    osrmCache[key]=packed;
+                    return packed;
+                }
+            }catch(e){}
+            const meters=pathMeters(pts);
+            return { path:pts, meters, seconds:estimateSeconds(meters,'drive') };
+        }
+        function lineDuration(pixelLength, routeKey){
+            const mobile=isMobileView(), allView=routeKey==='all';
+            const min=mobile?(allView?1600:2800):(allView?900:1400);
+            const max=mobile?(allView?2800:5600):(allView?1800:2800);
+            const px=mobile?(allView?0.22:0.12):0.28;
+            return Math.max(min, Math.min(max, pixelLength/px));
+        }
+        function whenPathReady(polyline){
+            return new Promise(resolve => {
+                let tries=24;
+                const tick=()=>{
+                    const el=polyline.getElement();
+                    if(el && typeof el.getTotalLength==='function') resolve(el);
+                    else if(tries-->0) requestAnimationFrame(tick);
+                    else resolve(null);
+                };
+                requestAnimationFrame(tick);
+            });
+        }
+        function animateLine(polyline, duration){
+            return new Promise(async resolve => {
+                const path=await whenPathReady(polyline);
+                if(!path){ resolve(duration); return; }
+                const length=path.getTotalLength();
+                path.style.transition='none';
+                path.style.strokeDasharray=length+' '+length;
+                path.style.strokeDashoffset=String(length);
+                path.getBoundingClientRect();
+                path.style.transition='stroke-dashoffset '+duration+'ms ease-in-out';
+                path.style.strokeDashoffset='0';
+                setTimeout(()=>resolve(duration), duration+40);
+            });
+        }
+        function moveMarkerAlong(marker, latlngs, duration, mode){
+            return new Promise(resolve => {
+                if(!marker || !latlngs || latlngs.length<2){ resolve(); return; }
+                const dists=[0]; let total=0;
+                for(let i=1;i<latlngs.length;i++){ total += L.latLng(latlngs[i-1]).distanceTo(L.latLng(latlngs[i])); dists.push(total); }
+                if(!total){ resolve(); return; }
+                const [h0a,h0b]=headingPair(latlngs,0);
+                applyVehicleHeading(marker, h0a, h0b, mode);
+                const start=performance.now();
+                const ease=t=>t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+                function frame(now){
+                    if(marker._aborted){ resolve(); return; }
+                    const t=Math.min(1,(now-start)/duration);
+                    const target=total*ease(t);
+                    let i=1; while(i<dists.length && dists[i]<target) i++;
+                    const a=latlngs[i-1], b=latlngs[Math.min(i,latlngs.length-1)];
+                    const span=(dists[i]-dists[i-1])||1, f=(target-dists[i-1])/span;
+                    marker.setLatLng([a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f]);
+                    const [ha,hb]=headingPair(latlngs, i-1);
+                    applyVehicleHeading(marker, ha, hb, mode);
+                    if(t<1) requestAnimationFrame(frame); else resolve();
+                }
+                requestAnimationFrame(frame);
+            });
+        }
+        function fitPath(path, maxZoom){
+            return new Promise(resolve => {
+                if(!currentMap || !path || path.length<2){ resolve(); return; }
+                let done=false;
+                const finish=()=>{ if(done) return; done=true; currentMap.off('moveend', finish); resolve(); };
+                currentMap.once('moveend', finish);
+                currentMap.fitBounds(L.latLngBounds(path).pad(0.18), { animate:true, duration:0.7, maxZoom:maxZoom||12, padding:[44,44] });
+                setTimeout(finish, 850);
+            });
+        }
+        async function drawMap(routeKey){
+            if(!currentMap) return;
+            const seq=++mapDrawSeq;
+            clearMapLayers();
+            const routeData=routes[routeKey]||routes.all;
+            const hint=document.getElementById('map-hint');
+            if(hint) hint.textContent=mapHints[routeKey]||'';
+            setMapDistance('', '', 0, 0);
+            currentMap.fitBounds(L.latLngBounds(routeData.points.map(k=>spots[k].coords)), { padding:[50,50], maxZoom:routeData.maxZoom||11 });
+            const legs=[];
+            routeData.lines.forEach(line => { for(let i=0;i<line.pts.length-1;i++) legs.push({ from:line.pts[i], to:line.pts[i+1], color:line.color, mode:line.mode||'drive' }); });
+            const packed=await Promise.all(legs.map(async leg => {
+                if(leg.mode==='air'){
+                    const path=[spots[leg.from].coords, spots[leg.to].coords];
+                    const meters=pathMeters(path);
+                    return { path, meters, seconds:estimateSeconds(meters,'air') };
+                }
+                return roadPath([spots[leg.from].coords, spots[leg.to].coords]);
+            }));
+            if(seq!==mapDrawSeq) return;
+            const paths=packed.map(item=>item.path);
+            await new Promise(r=>setTimeout(r,280));
+            if(seq!==mapDrawSeq) return;
+            paths.forEach((path,i)=>{
+                const ghost=L.polyline(path,{ color:'#94a3b8', weight:3, opacity:0.2, dashArray:legs[i].mode==='air'?'10,10':null, lineJoin:'round', lineCap:'round' }).addTo(currentMap);
+                mapLayers.push(ghost);
+            });
+            const placed=new Set();
+            const addPin=key=>{
+                if(!key||placed.has(key)) return;
+                placed.add(key);
+                const marker=L.marker(spots[key].coords,{ icon:pinIcon(spots[key]), zIndexOffset:200 }).addTo(currentMap).bindTooltip(spots[key].title,{ direction:'top', offset:[0,-16] });
+                mapLayers.push(marker);
+            };
+            const legMaxZoom=leg => leg.mode==='air' ? 5 : (routeKey==='all' ? 11 : Math.max(routeData.maxZoom||12, 11));
+            await fitPath(paths[0], legMaxZoom(legs[0]));
+            if(seq!==mapDrawSeq) return;
+            addPin(legs[0].from);
+            const bus=L.marker(spots[legs[0].from].coords,{ icon:vehicleIcon(legs[0].mode, spots[legs[0].from].coords, spots[legs[0].to].coords), zIndexOffset:900 }).addTo(currentMap);
+            bus._aborted=false; activeBus=bus; mapLayers.push(bus);
+            for(let i=0;i<legs.length;i++){
+                if(seq!==mapDrawSeq) return;
+                const leg=legs[i], path=paths[i];
+                const meters=packed[i].meters||pathMeters(path);
+                const seconds=packed[i].seconds||estimateSeconds(meters, leg.mode);
+                bus.setIcon(vehicleIcon(leg.mode, spots[leg.from].coords, spots[leg.to].coords));
+                bus.setLatLng(path[0]);
+                setMapDistance(leg.from, leg.to, meters, seconds, leg.mode);
+                await fitPath(path, legMaxZoom(leg));
+                if(seq!==mapDrawSeq) return;
+                const poly=L.polyline(path,{ color:leg.color, weight:leg.mode==='air'?3:5, opacity:0.95, dashArray:leg.mode==='air'?'10 8':null, lineJoin:'round', lineCap:'round' }).addTo(currentMap);
+                mapLayers.push(poly);
+                const ready=await whenPathReady(poly);
+                const ms=lineDuration(ready?ready.getTotalLength():400, routeKey);
+                await Promise.all([animateLine(poly, ms), moveMarkerAlong(bus, path, ms, leg.mode)]);
+                if(seq!==mapDrawSeq) return;
+                addPin(leg.to);
+                await new Promise(r=>setTimeout(r, isMobileView()?280:140));
+            }
+            if(seq!==mapDrawSeq) return;
+            if(bus && currentMap.hasLayer(bus)) currentMap.removeLayer(bus);
+            mapLayers=mapLayers.filter(layer=>layer!==bus);
+            if(activeBus===bus) activeBus=null;
+            const finalKeys=routeData.points.filter(k=>k!=='icn');
+            currentMap.fitBounds(L.latLngBounds((finalKeys.length?finalKeys:routeData.points).map(k=>spots[k].coords)), { padding:[40,40], maxZoom: routeKey==='all'?8:Math.min(routeData.maxZoom||11,11), animate:true });
+        }
+        function mapZoom(delta){ if(!currentMap) return; delta>0?currentMap.zoomIn():currentMap.zoomOut(); }
+        function setMapBtnActive(day){
+            document.querySelectorAll('.map-btn').forEach(btn => {
+                btn.classList.remove('bg-tm','text-white','shadow-md');
+                btn.classList.add('bg-white','text-slate-600');
+            });
+            const target=document.getElementById('btn-map-'+day);
+            if(target){ target.classList.remove('bg-white','text-slate-600'); target.classList.add('bg-tm','text-white','shadow-md'); }
+        }
+        function initMap(initialKey){
+            if(mapInited || !window.L) return;
+            mapInited=true;
+            currentMap=L.map('map',{ scrollWheelZoom:false, zoomControl:false });
+            if(typeof L.maplibreGL==='function') L.maplibreGL({ style:'https://tiles.openfreemap.org/styles/positron' }).addTo(currentMap);
+            else L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',{ maxZoom:19, attribution:'Tiles © Esri' }).addTo(currentMap);
+            const startKey=initialKey || getTodayDayKey() || (isMobileView()?'day1':'all');
+            setMapBtnActive(startKey);
+            drawMap(startKey);
+        }
+        function filterMap(day){
+            setMapBtnActive(day);
+            if(!currentMap){ initMap(day); return; }
+            drawMap(day);
+        }
+        window.filterMap=filterMap;
+        window.mapZoom=mapZoom;
+        const mapSection=document.getElementById('map-section');
+        if(mapSection && 'IntersectionObserver' in window){
+            const io=new IntersectionObserver(entries => { if(entries[0].isIntersecting){ initMap(); io.disconnect(); } }, { threshold:0.1 });
+            io.observe(mapSection);
+        } else initMap();
+    </script>
+</body>
+</html>
