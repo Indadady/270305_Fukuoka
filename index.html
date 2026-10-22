@@ -63,8 +63,9 @@
         @media print {
             @page { size: A4 portrait; margin: 10mm 12mm; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            html, body { background: #fff !important; color: #000 !important; }
-            header, footer, section:not(#print-area), .no-print, #toast, #tm-inquiry-modal, #phrase-modal, #custom-confirm { display: none !important; }
+            html, body { background: #fff !important; color: #000 !important; height: auto !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; }
+            main { margin: 0 !important; padding: 0 !important; }
+            header, footer, section:not(#print-area), .no-print, #toast, #phrase-modal, #custom-confirm { display: none !important; }
             #print-area { display: block !important; }
             .print-page-2 { break-before: page; page-break-before: always; }
             .print-header-top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--tm); padding-bottom: 6px; margin-bottom: 8px; }
@@ -90,6 +91,16 @@
             .print-box h3 { color: var(--tm); font-size: 12px; font-weight: 900; margin-bottom: 4px; }
             .print-contacts { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; margin-top: 8px; font-size: 9.5px; }
             .pc-role { font-weight: 800; color: var(--tm); margin-right: 3px; }
+            .print-checklist { border: 1.5px solid #1e293b; border-radius: 4px; padding: 8px 10px; margin-bottom: 8px; }
+            .print-checklist h2 { font-size: 12px; font-weight: 900; color: var(--tm); margin: 0 0 6px; }
+            .print-checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 12px; font-size: 10.5px; font-weight: 600; }
+            .print-check-item { display: flex; align-items: flex-start; gap: 6px; line-height: 1.35; }
+            .print-check-box { width: 11px; height: 11px; border: 1.5px solid var(--tm); border-radius: 2px; flex-shrink: 0; margin-top: 1px; }
+            .print-qr-box { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border: 1.5px solid #1e293b; border-radius: 4px; margin-top: 8px; }
+            .print-qr-box img { width: 92px; height: 92px; border: 1px solid #1e293b; background: #fff; }
+            .print-qr-box strong { display: block; color: var(--tm); font-size: 12px; margin-bottom: 3px; }
+            .print-qr-box p { font-size: 10.5px; line-height: 1.4; margin: 0; }
+            .print-qr-box .qr-url { color: #475569; font-size: 9.5px; margin-top: 4px; word-break: break-all; }
         }
     </style>
 </head>
@@ -128,7 +139,7 @@
         <div id="print-area">
             <div class="print-header-top">
                 <img src="assets/images/syncverse-logo.png" alt="SYNCVERSE">
-                <div class="print-doc-no">문서번호: SV-270305-FUKUOKA</div>
+                <div class="print-doc-no">SV-270305-FUKUOKA · 1/2</div>
             </div>
             <div class="print-title">후쿠오카 3박 4일 일정표</div>
             <p class="print-subtitle">히타 · 벳부 · 유후인 · 아소 · 구마모토 · 야나가와 · 다자이후 · 항공·현지 사정에 따라 바뀔 수 있습니다.</p>
@@ -204,24 +215,38 @@
             <div class="print-page-2">
                 <div class="print-header-top">
                     <img src="assets/images/syncverse-logo.png" alt="SYNCVERSE">
-                    <div class="print-doc-no">좌석·체크인 · 보조배터리 요약</div>
+                    <div class="print-doc-no">SV-270305-FUKUOKA · 2/2</div>
+                </div>
+                <div class="print-title">준비물 &amp; 스마트 가이드북</div>
+                <p class="print-subtitle">출발 전에 체크하고, QR로 이 가이드북을 스마트폰에서 열어 주세요.</p>
+                <div class="print-checklist">
+                    <h2>□ 출발 전 준비물</h2>
+                    <div class="print-checklist-grid">
+                        <div class="print-check-item"><span class="print-check-box"></span>여권 (출국일 기준 유효기간 6개월 이상)</div>
+                        <div class="print-check-item"><span class="print-check-box"></span>Visit Japan Web QR 저장</div>
+                        <div class="print-check-item"><span class="print-check-box"></span>엔화와 해외 결제 카드</div>
+                        <div class="print-check-item"><span class="print-check-box"></span>겉옷 (3월 초, 아소는 더 춥습니다)</div>
+                        <div class="print-check-item"><span class="print-check-box"></span>편한 신발</div>
+                        <div class="print-check-item"><span class="print-check-box"></span>개인 상비약</div>
+                        <div class="print-check-item"><span class="print-check-box"></span>보조배터리 (기내 휴대, 위탁 금지)</div>
+                        <div class="print-check-item"><span class="print-check-box"></span>개인 세면도구 · 충전기</div>
+                    </div>
                 </div>
                 <div class="print-box">
-                    <h3>이스타항공 ZE645 / ZE648 · 온라인 체크인</h3>
-                    <p>항공권 발권(E-티켓 발행) 완료 후, 출발 24시간 전부터 1시간 30분 전까지 온라인 체크인에서 남은 일반석을 무료로 고를 수 있습니다. 일본 출발(ZE648)도 온라인 체크인이 됩니다. 앞좌석·비상구 등 일부 좌석은 유료일 수 있고, 10명 이상 단체 예약은 개인 화면이 열리지 않을 수 있습니다. 그때는 공항 카운터에서 일행 여권을 함께 제시하고 인접 좌석을 요청해 주세요. 스루가이드가 같은 편으로 동행합니다.</p>
-                    <p style="margin-top:4px;"><strong>가는 편 ZE645</strong> 3/5(금) 08:40 인천 → 10:20 후쿠오카 · 온라인 체크인 3/4(목) 08:40~3/5(금) 07:10 · 인천 T1 3층 F카운터 06:10~07:40</p>
-                    <p><strong>오는 편 ZE648</strong> 3/8(월) 15:20 후쿠오카 → 16:30 인천 · 온라인 체크인 3/7(일) 15:20~3/8(월) 13:50 · 후쿠오카 국제선 3층 K카운터 12:50~14:20</p>
-                    <p style="margin-top:4px;">위탁 수하물은 출발 1시간 전까지. 허용량은 발권 운임을 따릅니다. 항공사 정책과 당일 공항 사정으로 바뀔 수 있습니다.</p>
+                    <h3>좌석 · 체크인 · 보조배터리</h3>
+                    <p>항공권 발권(E-티켓 발행) 완료 후 온라인 체크인. ZE645는 3/4(목) 08:40~3/5(금) 07:10, ZE648은 3/7(일) 15:20~3/8(월) 13:50. 일행 여권을 함께 보여 주면 인접 좌석을 요청할 수 있습니다. 보조배터리는 기내 휴대만 가능하고 위탁·선반 보관·기내 충전은 불가합니다. 1인 2개, 160Wh 초과 불가.</p>
                 </div>
-                <div class="print-box">
-                    <h3>보조배터리 · 전자담배</h3>
-                    <p>기내 사용·충전 금지. 위탁 수하물 절대 금지. 선반 보관 불가, 직접 휴대하거나 앞좌석 주머니에 둡니다. 단락 방지(절연테이프, 투명 비닐 개별 보관, 전자담배 전원 OFF). 1인 최대 2개. 160Wh 초과 불가. 100Wh 초과~160Wh 이하는 카운터 승인. 파손·리콜 제품 반입 금지.</p>
+                <div class="print-qr-box">
+                    <img src="assets/images/guidebook-qr.png" alt="스마트 가이드북 QR">
+                    <div>
+                        <strong>스마트 가이드북 바로가기</strong>
+                        <p>QR을 스캔하면 일정, 동선, 준비물, 연락처를 스마트폰에서 볼 수 있습니다.</p>
+                        <p class="qr-url">https://indadady.github.io/270305_Fukuoka/</p>
+                    </div>
                 </div>
-                <div class="print-box">
-                    <h3>포함 / 불포함</h3>
-                    <p><strong>포함</strong> 호텔(2인 1실), 전용차량(28인승), 식사, 입장료, 기사·스루가이드, 기사·가이드 팁. 스루가이드 항공료(TAX·유류세)는 여행사 부담. 쇼핑은 면세점 1회.</p>
-                    <p><strong>불포함</strong> 항공료, TAX 및 유류세, 매너팁(기타 팁), 개인 경비, 여행자보험.</p>
-                    <p>호텔은 북앤바이입니다. 예약 시점과 현지 사정에 따라 동급으로 바뀔 수 있습니다.</p>
+                <div class="print-contacts">
+                    <span><span class="pc-role">담당</span> 양리리 010-2359-3449</span>
+                    <span><span class="pc-role">SYNCVERSE</span> www.syncverse.co.kr</span>
                 </div>
             </div>
         </div>
@@ -408,13 +433,15 @@
         <section id="schedule" class="py-16 bg-slate-50 border-t border-slate-200">
             <div class="container mx-auto px-4 max-w-4xl">
                 <div class="text-center mb-6">
-                    <div class="flex items-center justify-center gap-3 flex-wrap">
+                    <div class="flex items-start justify-center gap-3 flex-wrap">
                         <h2 class="text-3xl font-bold">상세 일정</h2>
-                        <button type="button" onclick="handlePrint()" class="no-print inline-flex items-center gap-1.5 bg-slate-800 text-white px-3 py-1.5 rounded-lg text-xs font-bold">
-                            <i class="fa-solid fa-print"></i> 일정표 인쇄하기
-                        </button>
+                        <div class="no-print text-center">
+                            <button type="button" onclick="handlePrint()" class="inline-flex items-center gap-1.5 bg-slate-800 text-white px-3 py-1.5 rounded-lg text-xs font-bold">
+                                <i class="fa-solid fa-print"></i> 일정표 인쇄하기
+                            </button>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">모바일(카카오톡 등)에서는<br>인쇄가 어려울 수 있어요.<br>다른 브라우저나 PC에서 열어 주세요.</p>
+                        </div>
                     </div>
-                    <p class="no-print md:hidden text-center text-xs text-slate-500 mt-2 leading-relaxed">모바일(카카오톡 등)에서는<br>인쇄가 어려울 수 있어요.<br>다른 브라우저나 PC에서 열어 주세요.</p>
                     <p class="text-sm text-slate-500 mt-3">이동 시간은 도로가 막히지 않을 때의 대략 시간입니다.</p>
                 </div>
                 <div class="flex gap-2 overflow-x-auto no-scrollbar justify-center mb-6">
@@ -625,13 +652,16 @@
                     <div class="md:w-1/2">
                         <span class="inline-block bg-emerald-600 text-xs font-bold px-3 py-1 rounded-full mb-3">ESG · 디지털 전환</span>
                         <h2 class="text-2xl font-bold mb-2">종이 일정표 대신 이 화면</h2>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-3">10명 기준으로 인쇄 일정표 약 80장, 탄소 약 0.38kg, 물 약 750L를 아낄 수 있습니다.</p>
-                        <p id="tm-view-count" class="tm-view-count text-sm font-bold text-emerald-300">📊 실시간 가이드북 열람 : -회</p>
+                        <p class="text-sm text-slate-300 leading-relaxed">10명 기준으로 인쇄 일정표 약 80장, 탄소 약 0.38kg, 물 약 750L를 아낄 수 있습니다.</p>
                     </div>
-                    <div class="grid grid-cols-3 gap-3 w-full md:w-1/2">
+                    <div class="grid grid-cols-2 gap-3 w-full md:w-1/2">
                         <div class="bg-white/10 rounded-2xl p-4 text-center"><p class="text-xs text-emerald-300">종이</p><p class="text-2xl font-black">80<span class="text-sm">장</span></p></div>
                         <div class="bg-white/10 rounded-2xl p-4 text-center"><p class="text-xs text-sky-300">탄소</p><p class="text-2xl font-black">0.38<span class="text-sm">kg</span></p></div>
                         <div class="bg-white/10 rounded-2xl p-4 text-center"><p class="text-xs text-blue-200">물</p><p class="text-2xl font-black">750<span class="text-sm">L</span></p></div>
+                        <div class="bg-white/10 rounded-2xl p-4 text-center border border-emerald-400/40">
+                            <p class="text-xs text-emerald-300 leading-snug">실시간 가이드북 열람</p>
+                            <p id="tm-view-count" class="tm-view-count text-2xl font-black mt-1">-<span class="text-sm font-medium">회</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -643,32 +673,7 @@
         <p class="text-xs tracking-[0.16em] text-slate-500 font-bold mb-1">GLOBAL WELLNESS NETWORK</p>
         <a href="https://www.syncverse.co.kr/" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-tm underline">www.syncverse.co.kr</a>
         <p class="text-xs text-slate-500 mt-4">담당 양리리 010-2359-3449 · SV-270305-FUKUOKA</p>
-        <div class="max-w-xl mx-auto mt-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
-            <p class="font-bold text-slate-800 mb-2">우리 모임·학교·기관도 스마트 가이드북으로 여행 준비하기</p>
-            <p class="tm-view-count text-sm font-bold text-tm mb-4">📊 실시간 가이드북 열람 : -회</p>
-            <button type="button" onclick="openInquiry()" class="bg-tm text-white font-bold px-5 py-3 rounded-xl text-sm">투어메이커 맞춤 견적 · 상담 문의</button>
-        </div>
     </footer>
-
-    <div id="tm-inquiry-modal" class="fixed inset-0 z-[120] hidden items-end sm:items-center justify-center bg-black/60 px-0 sm:px-4 no-print" onclick="closeInquiry()">
-        <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-bold text-lg">투어메이커 여행·가이드북 문의</h3>
-                <button type="button" onclick="closeInquiry()" class="text-slate-400 text-xl" aria-label="닫기">×</button>
-            </div>
-            <div class="space-y-3 text-sm">
-                <a href="https://pf.kakao.com/_fxjxiQn/chat" target="_blank" rel="noopener noreferrer" class="block rounded-2xl border p-4 font-bold">💬 카카오톡 비즈니스 1:1 상담<br><span class="text-xs font-medium text-slate-500">전담: 조혁 이사 · 조혁 이사 전담 응대</span></a>
-                <button type="button" onclick="openSms()" class="w-full text-left rounded-2xl border p-4 font-bold">📝 10초 문자(SMS) 간편 견적 문의<br><span class="text-xs font-medium text-slate-500">010-4249-4026 조혁 이사</span></button>
-                <div class="rounded-2xl border p-4">
-                    <p class="font-bold mb-2">📞 직통 전화 상담</p>
-                    <p><a class="font-bold text-tm" href="tel:01042494026">조혁 이사 010-4249-4026</a> <span class="text-xs text-slate-500">현장/카톡/견적</span></p>
-                    <p class="mt-1"><a class="font-bold text-tm" href="tel:01094437881">이재명 대표 010-9443-7881</a> <span class="text-xs text-slate-500">총괄/기획</span></p>
-                    <p class="mt-1"><a class="font-bold text-tm" href="tel:0335622551">사무실 033-562-2551</a></p>
-                </div>
-                <a href="https://tourmaker.kr/?utm_source=smart_guidebook&utm_medium=inquiry_modal&utm_campaign=270305-fukuoka" target="_blank" rel="noopener noreferrer" class="block rounded-2xl border p-4 font-bold">🌐 공식 홈페이지 &amp; 포트폴리오<br><span class="text-xs font-medium text-slate-500">tourmaker.kr</span></a>
-            </div>
-        </div>
-    </div>
 
     <div id="phrase-modal" class="fixed inset-0 z-[110] hidden items-end sm:items-center justify-center bg-black/70 px-0 sm:px-4 no-print" onclick="closePhraseModal()">
         <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl max-h-[85vh] overflow-hidden flex flex-col" onclick="event.stopPropagation()">
@@ -782,19 +787,6 @@
             if (navigator.share) navigator.share({ title, url }).catch(() => {});
             else navigator.clipboard?.writeText(url);
         }
-        function openInquiry() {
-            const el = document.getElementById('tm-inquiry-modal');
-            el.classList.remove('hidden'); el.classList.add('flex');
-        }
-        function closeInquiry() {
-            const el = document.getElementById('tm-inquiry-modal');
-            el.classList.add('hidden'); el.classList.remove('flex');
-        }
-        function openSms() {
-            const body = encodeURIComponent('[후쿠오카 3박4일 가이드북 보고 문의드립니다] 단체/모임명 / 희망지역 / 예상인원 / 출발시기 : ');
-            const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-            location.href = ios ? 'sms:01042494026&body=' + body : 'sms:01042494026?body=' + body;
-        }
         function openPhraseModal() {
             const el = document.getElementById('phrase-modal');
             el.classList.remove('hidden'); el.classList.add('flex');
@@ -816,8 +808,8 @@
             const key = 'tm_hit_' + slug;
             const nodes = document.querySelectorAll('.tm-view-count');
             const paint = (n) => {
-                const text = '📊 실시간 가이드북 열람 : ' + Number(n).toLocaleString('ko-KR') + '회';
-                nodes.forEach(el => { el.textContent = text; });
+                const text = Number(n).toLocaleString('ko-KR') + '<span class="text-sm font-medium">회</span>';
+                nodes.forEach(el => { el.innerHTML = text; });
             };
             const fallback = () => {
                 fetch('https://tally.yuki.sh/hits/tourmaker/' + slug + '.json')
