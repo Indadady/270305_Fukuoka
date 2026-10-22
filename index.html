@@ -61,46 +61,53 @@
         #event-day-bar { background: #fff; border-bottom: 1px solid #e2e8f0; }
         @media screen { #print-area { display: none !important; } }
         @media print {
-            @page { size: A4 portrait; margin: 10mm 12mm; }
+            @page { size: A4 portrait; margin: 12mm 10mm; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            html, body { background: #fff !important; color: #000 !important; height: auto !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; }
+            html, body { background: #fff !important; color: #1e293b !important; height: auto !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; }
             main { margin: 0 !important; padding: 0 !important; }
             header, footer, section:not(#print-area), .no-print, #toast, #phrase-modal, #custom-confirm { display: none !important; }
-            #print-area { display: block !important; }
+            #print-area { display: block !important; width: 100%; font-family: 'Noto Sans KR', sans-serif; color: #1e293b; line-height: 1.5; }
             .print-page-2 { break-before: page; page-break-before: always; }
-            .print-header-top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--tm); padding-bottom: 6px; margin-bottom: 8px; }
-            .print-header-top img { height: 26px; }
-            .print-doc-no { font-size: 9px; color: #555; font-weight: bold; }
-            .print-title { text-align: center; font-size: 16px; font-weight: 900; color: var(--tm); margin-bottom: 2px; line-height: 1.35; }
-            .print-subtitle { text-align: center; font-size: 9px; color: #475569; margin: 0 0 8px; }
-            .print-overview { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; background: #f8fafc !important; border: 1px solid #cbd5e1 !important; border-radius: 4px; padding: 6px 10px; margin-bottom: 8px; font-size: 9.5px; }
-            .print-overview .label { font-weight: 800; color: var(--tm); margin-right: 4px; }
-            .tm-table { width: 100%; border-collapse: collapse; font-size: 9px; table-layout: fixed; border: 1.5px solid #1e293b !important; }
+            .print-header-top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--tm); padding-bottom: 12px; margin-bottom: 16px; }
+            .print-header-top img { height: 42px; width: auto; }
+            .print-doc-no { font-size: 13px; color: #475569; font-weight: 500; }
+            .print-title { text-align: center; font-size: 26px; font-weight: 700; color: #0f172a; margin: 0 0 14px; letter-spacing: -0.5px; line-height: 1.3; }
+            .print-overview { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; background: #f8fafc !important; border: 1px solid #94a3b8 !important; border-radius: 6px; padding: 12px 16px; margin-bottom: 14px; font-size: 14px; }
+            .print-overview .label { font-weight: 700; color: var(--tm); margin-right: 6px; }
+            .tm-table { width: 100%; border-collapse: collapse; font-size: 13.5px; table-layout: fixed; border: 2px solid #1e293b !important; margin-bottom: 10px; }
             .tm-table th, .tm-table td { border: 1px solid #1e293b !important; }
-            .tm-table th { background: #f1f5f9 !important; text-align: center; padding: 4px !important; color: var(--tm); font-size: 10px; }
-            .tm-table td { padding: 5px 7px !important; vertical-align: top; line-height: 1.4; }
-            .tm-col-date { width: 12%; text-align: center; font-weight: 700; background: #f8fafc !important; vertical-align: middle; }
+            .tm-table th { background: #f8fafc !important; text-align: center; padding: 10px !important; color: #1e293b; font-size: 14.5px; font-weight: 700; }
+            .tm-table td { padding: 10px 12px !important; vertical-align: top; line-height: 1.5; }
+            .tm-table tr, .tm-table td { break-inside: avoid; page-break-inside: avoid; }
+            .tm-table tr { border-top: 2px solid #1e293b; }
+            .tm-col-date { width: 14%; text-align: center; font-weight: 700; background: #f8fafc !important; vertical-align: middle; font-size: 13.5px; }
             .tm-col-meal { width: 16%; text-align: center; vertical-align: middle; }
-            .tm-desc-list { list-style: none; margin: 2px 0; padding: 0; }
-            .tm-desc-list li { position: relative; padding-left: 9px; margin-bottom: 2px; }
-            .tm-desc-list li::before { content: '■'; font-size: 6px; position: absolute; left: 0; top: 3px; color: var(--tm); }
-            .tm-highlight { font-weight: 700; color: var(--tm); }
-            .tm-hotel-info { font-size: 8.5px; font-weight: bold; color: #334155; margin-top: 3px; }
-            .tm-meal-simple { font-size: 9px; text-align: left; }
-            .print-box { border: 1.5px solid #1e293b; border-radius: 4px; padding: 8px 10px; margin-top: 8px; font-size: 9.5px; line-height: 1.45; }
-            .print-box h3 { color: var(--tm); font-size: 12px; font-weight: 900; margin-bottom: 4px; }
-            .print-contacts { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; margin-top: 8px; font-size: 9.5px; }
-            .pc-role { font-weight: 800; color: var(--tm); margin-right: 3px; }
-            .print-checklist { border: 1.5px solid #1e293b; border-radius: 4px; padding: 8px 10px; margin-bottom: 8px; }
-            .print-checklist h2 { font-size: 12px; font-weight: 900; color: var(--tm); margin: 0 0 6px; }
-            .print-checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 12px; font-size: 10.5px; font-weight: 600; }
-            .print-check-item { display: flex; align-items: flex-start; gap: 6px; line-height: 1.35; }
-            .print-check-box { width: 11px; height: 11px; border: 1.5px solid var(--tm); border-radius: 2px; flex-shrink: 0; margin-top: 1px; }
-            .print-qr-box { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border: 1.5px solid #1e293b; border-radius: 4px; margin-top: 8px; }
-            .print-qr-box img { width: 92px; height: 92px; border: 1px solid #1e293b; background: #fff; }
-            .print-qr-box strong { display: block; color: var(--tm); font-size: 12px; margin-bottom: 3px; }
-            .print-qr-box p { font-size: 10.5px; line-height: 1.4; margin: 0; }
-            .print-qr-box .qr-url { color: #475569; font-size: 9.5px; margin-top: 4px; word-break: break-all; }
+            .tm-desc-list { list-style: none; margin: 6px 0 0; padding: 0 0 0 2px; }
+            .tm-desc-list li { position: relative; padding-left: 14px; margin-bottom: 4px; line-height: 1.5; }
+            .tm-desc-list li::before { content: '■'; font-size: 8px; position: absolute; left: 0; top: 5px; color: var(--tm); }
+            .tm-highlight { font-weight: 700; color: #0f172a; }
+            .tm-hotel-info { font-size: 13.5px; font-weight: 700; color: #0f172a; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #94a3b8; }
+            .meal-wrapper { display: flex; flex-direction: column; gap: 8px; justify-content: center; text-align: left; padding-left: 2px; }
+            .meal-simple { display: flex; align-items: flex-start; font-size: 14px; color: #1e293b; line-height: 1.4; }
+            .meal-simple strong { color: var(--tm); margin-right: 4px; width: 22px; flex-shrink: 0; }
+            .print-remarks { font-size: 12.5px; color: #64748b; text-align: right; font-weight: 500; margin: 8px 0 12px; line-height: 1.45; }
+            .print-footer { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-top: 8px; padding-top: 12px; border-top: 1px solid #e2e8f0; }
+            .print-brand { font-size: 12.5px; color: #475569; }
+            .print-manager { text-align: right; border-left: 3px solid var(--tm); padding-left: 12px; }
+            .print-manager .names { color: #0f172a; font-weight: 700; font-size: 15px; }
+            .print-manager .sub { font-size: 12.5px; color: #475569; margin-top: 3px; }
+            .print-box { border: 2px solid #1e293b; border-radius: 6px; padding: 12px 14px; margin-top: 12px; font-size: 13.5px; line-height: 1.55; }
+            .print-box h3 { color: var(--tm); font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+            .print-checklist { border: 2px solid #1e293b; border-radius: 6px; padding: 12px 14px; margin-bottom: 4px; }
+            .print-checklist h2 { font-size: 15px; font-weight: 700; color: var(--tm); margin: 0 0 10px; }
+            .print-checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; font-size: 14px; font-weight: 500; }
+            .print-check-item { display: flex; align-items: flex-start; gap: 8px; line-height: 1.45; }
+            .print-check-box { width: 14px; height: 14px; border: 1.5px solid var(--tm); border-radius: 2px; flex-shrink: 0; margin-top: 3px; }
+            .print-qr-box { display: flex; align-items: center; gap: 16px; padding: 12px 14px; border: 2px solid #1e293b; border-radius: 6px; margin-top: 12px; }
+            .print-qr-box img { width: 108px; height: 108px; border: 1px solid #1e293b; background: #fff; }
+            .print-qr-box strong { display: block; color: var(--tm); font-size: 15px; margin-bottom: 4px; }
+            .print-qr-box p { font-size: 13.5px; line-height: 1.5; margin: 0; }
+            .print-qr-box .qr-url { color: #475569; font-size: 12.5px; margin-top: 6px; word-break: break-all; }
         }
     </style>
 </head>
@@ -142,13 +149,11 @@
                 <div class="print-doc-no">SV-270305-FUKUOKA · 1/2</div>
             </div>
             <div class="print-title">후쿠오카 3박 4일 일정표</div>
-            <p class="print-subtitle">히타 · 벳부 · 유후인 · 아소 · 구마모토 · 야나가와 · 다자이후 · 항공·현지 사정에 따라 바뀔 수 있습니다.</p>
             <div class="print-overview">
-                <div><span class="label">상품</span> 후쿠오카 3박 4일 (ZE) · 인천 스루가이드 미팅</div>
                 <div><span class="label">일정</span> 2027.03.05(금) ~ 03.08(월)</div>
-                <div><span class="label">인원</span> 10+1TG · 5트윈 · 전용차량 28인승</div>
+                <div><span class="label">인원</span> 10+1TG · 5트윈 · 28인승</div>
                 <div><span class="label">항공</span> ZE645 08:40/10:20 · ZE648 15:20/16:30</div>
-                <div><span class="label">담당</span> 양리리 010-2359-3449</div>
+                <div><span class="label">미팅</span> 인천공항 스루가이드 미팅 후 진행</div>
             </div>
             <table class="tm-table">
                 <thead><tr><th class="tm-col-date">일자/지역</th><th>일정</th><th class="tm-col-meal">식사</th></tr></thead>
@@ -162,9 +167,9 @@
                                 <li>아마가세 이동(약 30분) · <span class="tm-highlight">지온노타키</span></li>
                                 <li>벳부 이동(약 1시간) · 호텔 투숙 · 온천</li>
                             </ul>
-                            <div class="tm-hotel-info">🏨 오에도 벳부 후게츠 또는 동급 (준4성급) · 북앤바이</div>
+                            <div class="tm-hotel-info">호텔 오에도 벳부 후게츠 또는 동급 (준4성급) · 북앤바이</div>
                         </td>
-                        <td class="tm-col-meal"><div class="tm-meal-simple">조 불포함</div><div class="tm-meal-simple">중 현지식</div><div class="tm-meal-simple">석 호텔 뷔페</div></td>
+                        <td class="tm-col-meal"><div class="meal-wrapper"><div class="meal-simple"><strong>조</strong><span>불포함</span></div><div class="meal-simple"><strong>중</strong><span>현지식</span></div><div class="meal-simple"><strong>석</strong><span>호텔 뷔페</span></div></div></td>
                     </tr>
                     <tr>
                         <td class="tm-col-date">2일차<br>3/6(토)<br>벳부<br>유후인<br>아소</td>
@@ -175,9 +180,9 @@
                                 <li>유후인 이동(약 50분) · 민예촌 거리 · <span class="tm-highlight">긴린코</span></li>
                                 <li>아소 이동(약 1시간) · <span class="tm-highlight">다이칸보</span> · <span class="tm-highlight">쿠사센리</span> · 온천</li>
                             </ul>
-                            <div class="tm-hotel-info">🏨 아소 카도망 또는 동급 (준4성급) · 북앤바이</div>
+                            <div class="tm-hotel-info">호텔 아소 카도망 또는 동급 (준4성급) · 북앤바이</div>
                         </td>
-                        <td class="tm-col-meal"><div class="tm-meal-simple">조 호텔식</div><div class="tm-meal-simple">중 토반야키</div><div class="tm-meal-simple">석 호텔 뷔페</div></td>
+                        <td class="tm-col-meal"><div class="meal-wrapper"><div class="meal-simple"><strong>조</strong><span>호텔식</span></div><div class="meal-simple"><strong>중</strong><span>토반야키</span></div><div class="meal-simple"><strong>석</strong><span>호텔 뷔페</span></div></div></td>
                     </tr>
                     <tr>
                         <td class="tm-col-date">3일차<br>3/7(일)<br>구마모토<br>야나가와<br>후쿠오카</td>
@@ -188,9 +193,9 @@
                                 <li>다자이후 이동(약 1시간 20분) · <span class="tm-highlight">다자이후 텐만구</span></li>
                                 <li>후쿠오카 이동(약 30분) · 호텔 투숙</li>
                             </ul>
-                            <div class="tm-hotel-info">🏨 몬테 에르마나 후쿠오카 또는 동급 (준4성급) · 북앤바이</div>
+                            <div class="tm-hotel-info">호텔 몬테 에르마나 후쿠오카 또는 동급 (준4성급) · 북앤바이</div>
                         </td>
-                        <td class="tm-col-meal"><div class="tm-meal-simple">조 호텔식</div><div class="tm-meal-simple">중 야키니쿠</div><div class="tm-meal-simple">석 샤브샤브 무제한</div></td>
+                        <td class="tm-col-meal"><div class="meal-wrapper"><div class="meal-simple"><strong>조</strong><span>호텔식</span></div><div class="meal-simple"><strong>중</strong><span>야키니쿠</span></div><div class="meal-simple"><strong>석</strong><span>샤브샤브 무제한</span></div></div></td>
                     </tr>
                     <tr>
                         <td class="tm-col-date">4일차<br>3/8(월)<br>후쿠오카<br>인천</td>
@@ -201,15 +206,17 @@
                                 <li><strong>ZE648</strong> 후쿠오카 15:20 출발 / 인천 16:30 도착</li>
                             </ul>
                         </td>
-                        <td class="tm-col-meal"><div class="tm-meal-simple">조 호텔식</div><div class="tm-meal-simple">중 미즈타키 정식</div><div class="tm-meal-simple">석 불포함</div></td>
+                        <td class="tm-col-meal"><div class="meal-wrapper"><div class="meal-simple"><strong>조</strong><span>호텔식</span></div><div class="meal-simple"><strong>중</strong><span>미즈타키 정식</span></div><div class="meal-simple"><strong>석</strong><span>불포함</span></div></div></td>
                     </tr>
                 </tbody>
             </table>
-            <div class="print-contacts">
-                <span><span class="pc-role">담당</span> 양리리 010-2359-3449</span>
-                <span><span class="pc-role">홈페이지</span> www.syncverse.co.kr</span>
-                <span><span class="pc-role">후쿠오카총영사관</span> +81-92-771-0461</span>
-                <span><span class="pc-role">영사콜센터</span> +82-2-3210-0404</span>
+            <p class="print-remarks">※ 항공·현지 사정에 따라 바뀔 수 있습니다. 호텔은 북앤바이이며 동급으로 바뀔 수 있습니다.</p>
+            <div class="print-footer">
+                <div class="print-brand">www.syncverse.co.kr</div>
+                <div class="print-manager">
+                    <div class="names">담당 양리리 010-2359-3449</div>
+                    <div class="sub">후쿠오카총영사관 +81-92-771-0461 · 영사콜센터 +82-2-3210-0404</div>
+                </div>
             </div>
 
             <div class="print-page-2">
@@ -218,7 +225,6 @@
                     <div class="print-doc-no">SV-270305-FUKUOKA · 2/2</div>
                 </div>
                 <div class="print-title">준비물 &amp; 스마트 가이드북</div>
-                <p class="print-subtitle">출발 전에 체크하고, QR로 이 가이드북을 스마트폰에서 열어 주세요.</p>
                 <div class="print-checklist">
                     <h2>□ 출발 전 준비물</h2>
                     <div class="print-checklist-grid">
@@ -244,9 +250,11 @@
                         <p class="qr-url">https://indadady.github.io/270305_Fukuoka/</p>
                     </div>
                 </div>
-                <div class="print-contacts">
-                    <span><span class="pc-role">담당</span> 양리리 010-2359-3449</span>
-                    <span><span class="pc-role">SYNCVERSE</span> www.syncverse.co.kr</span>
+                <div class="print-footer">
+                    <div class="print-brand">www.syncverse.co.kr</div>
+                    <div class="print-manager">
+                        <div class="names">담당 양리리 010-2359-3449</div>
+                    </div>
                 </div>
             </div>
         </div>
