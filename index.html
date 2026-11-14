@@ -9,6 +9,9 @@
       gtag('config', 'G-JLH9GD9SVR');
     </script>
     <meta charset="UTF-8">
+    <meta name="tm-copyright" content="C-2026-059022">
+    <!-- TM-IP-REG:C-2026-059022 | TourMaker Smart Guidebook | Unauthorized reproduction prohibited -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>후쿠오카 3박 4일 가이드북</title>
     <meta name="description" content="2027.03.05~03.08 후쿠오카·히타·벳부·유후인·아소·구마모토 3박 4일 스마트 가이드북 · 이스타항공 ZE645/ZE648 · 인천공항 스루가이드 미팅 · SYNCVERSE (SV-270305-FUKUOKA)">
@@ -1229,6 +1232,38 @@
             const io=new IntersectionObserver(entries => { if(entries[0].isIntersecting){ initMap(); io.disconnect(); } }, { threshold:0.1 });
             io.observe(mapSection);
         } else initMap();
-    </script>
+    
+
+        // ==========================================
+        // [투어메이커] 지적재산권 콘솔 경고 + 도용 입증용 핑거프린트 트랩
+        // ==========================================
+        (function initTourmakerIpNotice() {
+            if (window.__TM_IP_NOTICE__) return;
+            window.__TM_IP_NOTICE__ = true;
+            try {
+                console.log(
+                    '%c⛔ TOURMAKER SMART GUIDEBOOK — 지적재산권 보호 문서',
+                    'color:#fff;background:#004098;font-weight:800;padding:10px 14px;border-radius:6px;font-size:13px;'
+                );
+                console.log(
+                    '%c본 문서의 HTML·CSS·JS 구조, UI/UX, 인쇄 레이아웃, ESG 대시보드, D-14 보안 잠금, 지도 동선, 문의 모달 등은 (주)투어메이커의 고유 저작물입니다.\n한국저작권위원회 저작권 등록번호 C-2026-059022 (등록일 2026.11.12)\n무단 복제·소스 도용·재배포·유사 서비스 제작 시 민·형사상 법적 조치가 진행될 수 있습니다.\n© 2026 이재명 · 투어메이커 · tourmaker.kr',
+                    'color:#004098;font-weight:600;line-height:1.7;font-size:12px;'
+                );
+            } catch (e) { /* ignore */ }
+
+            if (!document.querySelector('[data-tm-ip-trap="C-2026-059022"]')) {
+                const trap = document.createElement('div');
+                trap.className = 'tm-ip-fingerprint tm-sgb-core-v2026 tm-layout-signature';
+                trap.setAttribute('data-tm-ip-trap', 'C-2026-059022');
+                trap.setAttribute('data-tm-owner', 'tourmaker');
+                trap.setAttribute('data-tm-platform', 'smart-guidebook');
+                trap.setAttribute('aria-hidden', 'true');
+                trap.style.cssText = 'position:absolute;left:-99999px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;';
+                trap.textContent = 'TOURMAKER_IP_PROTECTED_C-2026-059022';
+                (document.body || document.documentElement).appendChild(trap);
+            }
+        })();
+
+</script>
 </body>
 </html>
